@@ -228,6 +228,22 @@ uint32  ADDR          :32 ;
 }FAULTADDR_BF;
 
 
+typedef struct{
+	
+uint32 											:5	;	
+uint32 INT_NUM_0_IN_PRI			:3	;	
+uint32 											:5	;	
+uint32 INT_NUM_1_IN_PRI			:3	;	
+uint32 											:5	;	
+uint32 INT_NUM_2_IN_PRI			:3	;	
+uint32 											:5	;	
+uint32 INT_NUM_3_IN_PRI			:3	;
+	
+}NVIC_PRI_BF;
+
+
+
+
 
 /**********************************************************************************************************************
  *  REG- TAG
@@ -358,12 +374,28 @@ typedef union
  *********************************************************************************************************************/
 
 #define CORTEX_M4_PERIPHERALS_BASE_ADDRESS 0xE000E000 
+#define NVIC_PRIX_BASE_ADDRESS					  (CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x400)
+
+ NVIC_PRI_BF NVIC_PRIX[35] __attribute__((at(NVIC_PRIX_BASE_ADDRESS))) ;// Warning 
+
+
 
 #define EN0                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x100)))
 #define EN1                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x104)))
 #define EN2                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x108)))
 #define EN3                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x10C)))
 #define EN4                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x110)))
+/*NVIC PRI Registers*/
+
+
+
+
+
+
+
+	
+	
+
 
 
 
