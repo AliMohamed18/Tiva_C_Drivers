@@ -14,11 +14,10 @@
  *********************************************************************************************************************/
 #include "IntCtrl.h"
 
-
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/	
-
+ 
 /**********************************************************************************************************************
  *  LOCAL DATA 
  *********************************************************************************************************************/
@@ -53,7 +52,7 @@
 *******************************************************************************/
 void IntCrtl_Init(void)
 {
-uint8 Counter , Group_Temp , SubGroup_Temp , Interrupt_Number_Temp ;
+uint8 Counter , Group_Temp , SubGroup_Temp , Interrupt_Number_Temp ,POSINTION_IN_PRIX ,PRIX_NUMBER	;
 	
 APINT.B.VECTKEY=APINT_VECTKEY; 					 // Field Guard
 APINT.B.ENDIANESS=STD_low;							 //Little-Endian Mode
@@ -78,12 +77,15 @@ PRIGROUP_CHOICE = YYY;
 
 APINT.B.PRIGROUP = PRIGROUP_CHOICE;        //The Split Of Group Priority From Subpriority
 
+__asm ("CPSID i"); // Disable all interrupts first then enable used interrupts only	
+
 for(Counter=0 ;Counter < NUMBER_OF_ACTIVATED_GRPUPS;Counter++){
 	
 Interrupt_Number_Temp = Interrupt_Groups[Counter].Interrupt_Number;	
 Group_Temp = Interrupt_Groups[Counter].Group_Priority;
 SubGroup_Temp =	Interrupt_Groups[Counter].SubGroup_Priority;
-	/*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
+	
+	
 	
 if	   (Interrupt_Number_Temp == 0	 || Interrupt_Number_Temp < 32  )  SET(EN0,(Interrupt_Number_Temp));
 else if(Interrupt_Number_Temp >= 32  &&	Interrupt_Number_Temp < 64  )  SET(EN1,(Interrupt_Number_Temp-32));
@@ -91,13 +93,104 @@ else if(Interrupt_Number_Temp >= 64  &&	Interrupt_Number_Temp < 96  )  SET(EN2,(
 else if(Interrupt_Number_Temp >= 96  &&	Interrupt_Number_Temp < 128 )  SET(EN3,(Interrupt_Number_Temp-96));
 else if(Interrupt_Number_Temp >= 128 &&	Interrupt_Number_Temp <= 138)  SET(EN4,(Interrupt_Number_Temp-128));
 
+POSINTION_IN_PRIX=Interrupt_Number_Temp	%	4;	
+PRIX_NUMBER	= ((Interrupt_Number_Temp-POSINTION_IN_PRIX)/4);
+
+#if   ( GROUPING_SYSTEM == 1)
+	
+switch(POSINTION_IN_PRIX){
+	
+	case 0 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_0_IN_PRI =Group_Temp ;
+	break ;
+	
+	case 1 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_1_IN_PRI =Group_Temp ;
+	break ;
+	
+	case 2 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_2_IN_PRI =Group_Temp ;
+	break ;
+		
+	case 3 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_3_IN_PRI =Group_Temp ;
+	break ;
+}
+#elif ( GROUPING_SYSTEM == 2)
+	
+switch(POSINTION_IN_PRIX){
+	
+	case 0 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_0_IN_PRI =(((Group_Temp<<1)&(0x6))|((SubGroup_Temp)&(0x1)));
+	break ;
+	
+	case 1 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_1_IN_PRI =(((Group_Temp<<1)&(0x6))|((SubGroup_Temp)&(0x1)));
+	break ;
+	
+	case 2 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_2_IN_PRI =(((Group_Temp<<1)&(0x6))|((SubGroup_Temp)&(0x1)));
+	break ;
+		
+	case 3 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_3_IN_PRI =(((Group_Temp<<1)&(0x6))|((SubGroup_Temp)&(0x1)));
+	break ;
+}	
+	
+#elif ( GROUPING_SYSTEM == 3)
+	
+switch(POSINTION_IN_PRIX){
+	
+	case 0 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_0_IN_PRI =(((Group_Temp<<2)&(0x4))|((SubGroup_Temp)&(0x3)));
+	break ;
+	
+	case 1 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_1_IN_PRI =(((Group_Temp<<2)&(0x4))|((SubGroup_Temp)&(0x3)));
+	break ;
+	
+	case 2 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_2_IN_PRI =(((Group_Temp<<2)&(0x4))|((SubGroup_Temp)&(0x3)));
+	break ;
+		
+	case 3 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_3_IN_PRI =(((Group_Temp<<2)&(0x4))|((SubGroup_Temp)&(0x3)));
+	break ;
+}	
+	
+#elif ( GROUPING_SYSTEM == 4)
+	
+switch(POSINTION_IN_PRIX){
+	
+	case 0 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_0_IN_PRI = SubGroup_Temp ;
+	break ;
+	
+	case 1 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_1_IN_PRI =SubGroup_Temp ;
+	break ;
+	
+	case 2 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_2_IN_PRI =SubGroup_Temp ;
+	break ;
+		
+	case 3 :
+	NVIC_PRIX[PRIX_NUMBER].INT_NUM_3_IN_PRI =SubGroup_Temp ;
+	break ;
+}	
+	
+#endif	
+	
+}
 	
 	
+__asm("MOV R0, 0x1"); // Switch to user 
+__asm("MSR CONTROL, R0");
 
 	
 	
   /*TODO : Assign Group\Subgroup priority in NVIC_PRIx Nvic and SCB_SYSPRIx Registers*/  
-}
+
 }
 /**********************************************************************************************************************
  *  END OF FILE: IntCrtl.c
