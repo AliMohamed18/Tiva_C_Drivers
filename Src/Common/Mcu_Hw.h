@@ -358,6 +358,15 @@ typedef union
  *********************************************************************************************************************/
 
 #define CORTEX_M4_PERIPHERALS_BASE_ADDRESS 0xE000E000 
+
+#define EN0                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x100)))
+#define EN1                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x104)))
+#define EN2                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x108)))
+#define EN3                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x10C)))
+#define EN4                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x110)))
+
+
+
 /*System Control Block (SCB) Registers*/
 
 #define ACTLR                (*((volatile ACTLR_TAG*     )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x008)))
