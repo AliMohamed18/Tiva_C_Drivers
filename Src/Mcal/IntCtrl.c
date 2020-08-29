@@ -84,6 +84,7 @@ Interrupt_Number_Temp = Interrupt_Groups[Counter].Interrupt_Number;
 Group_Temp = Interrupt_Groups[Counter].Group_Priority;
 SubGroup_Temp =	Interrupt_Groups[Counter].SubGroup_Priority;
 	/*TODO : Enable\Disable based on user configurations in NVIC_ENx and SCB_Sys Registers */
+	
 if	   (Interrupt_Number_Temp == 0	 || Interrupt_Number_Temp < 32  )  SET(EN0,(Interrupt_Number_Temp));
 else if(Interrupt_Number_Temp >= 32  &&	Interrupt_Number_Temp < 64  )  SET(EN1,(Interrupt_Number_Temp-32));
 else if(Interrupt_Number_Temp >= 64  &&	Interrupt_Number_Temp < 96  )  SET(EN2,(Interrupt_Number_Temp-64));
