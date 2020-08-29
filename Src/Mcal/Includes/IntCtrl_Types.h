@@ -205,6 +205,7 @@ extern const Interrupt_CfgType  Interrupt_Groups[NUMBER_OF_ACTIVATED_GRPUPS];
 
 
 
+
 #endif  /* INTCTRL_TYPES_H */
 
 /**********************************************************************************************************************
