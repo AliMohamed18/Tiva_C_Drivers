@@ -63,7 +63,7 @@ void Mcu_Init ( const Mcu_ConfigType* ConfigPtr ){
 *******************************************************************************/
 Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting ){
 	uint8 Counter =0 , Gate_Temp=0 ;	
-
+Std_ReturnType State= E_NOT_OK;
 /****************************************Enable Gates****************************************/
 for(Counter=0;Counter<NUMBER_OF_ACTIVATED_GATES;Counter++){
 	Gate_Temp= MCU_ACTIVATED_GATES[Counter];
@@ -139,14 +139,17 @@ else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_LFIOSC) 				RCC
 if(Mcu_Config[ClockSetting].PLL_STATE==PLL_POWERED_AND_LOCKED)
 {}
 else if(Mcu_Config[ClockSetting].PLL_STATE==PLL_UNPOWERED_OR_NOT_LOCKED_YET)
-{}
+{
+RCC.B.BYPASS=1;
+
+}
 
 
 
 
 
 
-
+return State;
 }
 	
 
