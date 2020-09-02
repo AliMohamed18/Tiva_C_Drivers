@@ -25,8 +25,7 @@
 typedef enum {
 	MCU_CLOCK_SOURCE_MOSC	=	0		,
 	MCU_CLOCK_SOURCE_PIOSC			,
-	MCU_CLOCK_SOURCE_LFIOSC			,
-	MCU_CLOCK_SOURCE_HIOSC
+	MCU_CLOCK_SOURCE_LFIOSC			
 }Mcu_ClockSourceType;
 
 typedef enum{
