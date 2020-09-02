@@ -79,7 +79,7 @@ APINT.B.PRIGROUP = PRIGROUP_CHOICE;        //The Split Of Group Priority From Su
 
 __asm ("CPSID i"); // Disable all interrupts first then enable used interrupts only	
 
-for(Counter=0 ;Counter < NUMBER_OF_ACTIVATED_GRPUPS;Counter++){
+for(Counter=0 ;Counter < NUMBER_OF_ACTIVATED_GROUPS;Counter++){
 	
 Interrupt_Number_Temp = Interrupt_Groups[Counter].Interrupt_Number;	
 Group_Temp = Interrupt_Groups[Counter].Group_Priority;
