@@ -15,7 +15,6 @@
  * INCLUDES
  *********************************************************************************************************************/
 #include "IntCtrl_Types.h"
-#include "IntCtrl_Cfg.h"
 #include "Std_Types.h"
 #include "Mcu_Hw.h"
 
@@ -34,12 +33,12 @@
 
 #define GROUPING_SYSTEM   3
 
+#define NUMBER_OF_ACTIVATED_GROUPS 6
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
 
-#define NUMBER_OF_ACTIVATED_GRPUPS 6
 
 
 #endif  /* INTCTRL_CFG_H */
