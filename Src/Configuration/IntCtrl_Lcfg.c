@@ -13,6 +13,7 @@
  *  INCLUDES
  *********************************************************************************************************************/
 #include "IntCtrl_Cfg.h"
+#include "IntCtrl_Types.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -26,7 +27,7 @@
  *  GLOBAL DATA
  *********************************************************************************************************************/
 
- Interrupt_CfgType Interrupt_Groups[NUMBER_OF_ACTIVATED_GRPUPS]={
+const Interrupt_CfgType Interrupt_Groups[NUMBER_OF_ACTIVATED_GROUPS]={
 	 
 { Interrupt_GPIO_Port_A , 1 , 0 },
 { Interrupt_GPIO_Port_B , 1 , 3 },
