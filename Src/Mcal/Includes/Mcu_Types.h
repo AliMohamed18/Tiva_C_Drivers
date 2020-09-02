@@ -31,8 +31,20 @@
 #define PLL_UNPOWERED_OR_NOT_LOCKED_YET 0
 #define PLL_POWERED_AND_LOCKED 1
 
-#define MCU_CLOCK_SOURCE_MOSC 1
-#define MCU_CLOCK_SOURCE_PIOSC 1
+typedef enum {
+	MCU_CLOCK_SOURCE_MOSC	=	0		,
+	MCU_CLOCK_SOURCE_PIOSC			,
+	MCU_CLOCK_SOURCE_LFIOSC			,
+	MCU_CLOCK_SOURCE_HIOSC
+}Mcu_ClockSourceType;
+
+typedef enum{
+MCU_CLOCK_FREQ_8 = 0 ,
+MCU_CLOCK_FREQ_16    ,
+MCU_CLOCK_FREQ_20    ,	
+MCU_CLOCK_FREQ_40	
+}Mcu_FreqType; 
+
 
 
 
@@ -48,9 +60,9 @@
 typedef uint8 Mcu_RawResetType ;
 typedef uint8 Mcu_PllStatusType ;
 typedef struct{
-	uint8 CLOCK_SOURCE ;
+	Mcu_ClockSourceType CLOCK_SOURCE ;
 	uint8 PLL_STATE ;
-	uint32 CLOCK_FREQ   ;
+	Mcu_FreqType CLOCK_FREQ   ;
 }Mcu_ConfigType;
 
 /**********************************************************************************************************************
