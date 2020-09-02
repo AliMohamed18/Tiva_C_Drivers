@@ -30,6 +30,8 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
+
+ 
 typedef enum{
 	
 /*									Reserved										 					*/
@@ -197,10 +199,12 @@ uint8								SubGroup_Priority;
 	
 }Interrupt_CfgType;
 
+extern const Interrupt_CfgType  Interrupt_Groups[NUMBER_OF_ACTIVATED_GROUPS];
+
+
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-extern const Interrupt_CfgType  Interrupt_Groups[NUMBER_OF_ACTIVATED_GRPUPS];
 
 
 
