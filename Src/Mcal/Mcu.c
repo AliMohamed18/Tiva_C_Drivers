@@ -64,6 +64,60 @@ void Mcu_Init ( const Mcu_ConfigType* ConfigPtr ){
 Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting ){
 	uint8 Counter =0 , Gate_Temp=0 ;	
 Std_ReturnType State= E_NOT_OK;
+
+	
+if(Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_MOSC){
+	RCC.B.MOSCDIS=0;
+	RCC.B.OSCSRC=0x0;
+}
+else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC) 				RCC.B.OSCSRC=0x1;
+else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC_DIV_4) 	RCC.B.OSCSRC=0x2;
+else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_LFIOSC) 				RCC.B.OSCSRC=0x3;
+
+if(Mcu_Config[ClockSetting].PLL_STATE==PLL_POWERED_AND_LOCKED)
+{
+RCC2.B.USERCC2=1; // Use RCC2
+RCC.B.XTAL=0x15;  // FeedBack 
+RCC2.B.BYPASS2=0; // To Use DIV400	
+RCC2.B.DIV400=0;  // use 200 Mhz
+RCC.B.BYPASS=0;	
+	
+if (Mcu_Config[ClockSetting].CLOCK_FREQ==MCU_CLOCK_FREQ_8){
+RCC.B.SYSDIV=7;
+RCC.B.USESYSDIV=1;	
+}	
+
+else if (Mcu_Config[ClockSetting].CLOCK_FREQ==MCU_CLOCK_FREQ_16){
+RCC.B.SYSDIV=11;
+RCC.B.USESYSDIV=1;	
+}
+
+else if (Mcu_Config[ClockSetting].CLOCK_FREQ==MCU_CLOCK_FREQ_40){
+RCC.B.SYSDIV=4;
+RCC.B.USESYSDIV=1;	
+}
+
+else if (Mcu_Config[ClockSetting].CLOCK_FREQ==MCU_CLOCK_FREQ_80){
+RCC.B.SYSDIV=1;
+RCC.B.USESYSDIV=1;	
+}
+}
+else if(Mcu_Config[ClockSetting].PLL_STATE==PLL_UNPOWERED_OR_NOT_LOCKED_YET)
+{
+RCC.B.BYPASS=1;
+	
+if (Mcu_Config[ClockSetting].CLOCK_FREQ==MCU_CLOCK_FREQ_8){
+RCC.B.SYSDIV=1;
+RCC.B.USESYSDIV=1;	
+}
+
+else if (Mcu_Config[ClockSetting].CLOCK_FREQ==MCU_CLOCK_FREQ_16){
+RCC.B.USESYSDIV=0;	
+}
+}
+State=Mcu_GetPllStatus();
+
+
 /****************************************Enable Gates****************************************/
 for(Counter=0;Counter<NUMBER_OF_ACTIVATED_GATES;Counter++){
 	Gate_Temp= MCU_ACTIVATED_GATES[Counter];
@@ -127,26 +181,7 @@ for(Counter=0;Counter<NUMBER_OF_ACTIVATED_GATES;Counter++){
 	else if(Gate_Temp==MCU_EEPROM_ENABLE_CLOCK)RCGCEEPROM.B.R0=1;	
 
 }
-	
-if(Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_MOSC){
-	RCC.B.MOSCDIS=0;
-	RCC.B.OSCSRC=0x0;
-}
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC) 				RCC.B.OSCSRC=0x1;
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC_DIV_4) 	RCC.B.OSCSRC=0x2;
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_LFIOSC) 				RCC.B.OSCSRC=0x3;
-
-if(Mcu_Config[ClockSetting].PLL_STATE==PLL_POWERED_AND_LOCKED)
-{}
-else if(Mcu_Config[ClockSetting].PLL_STATE==PLL_UNPOWERED_OR_NOT_LOCKED_YET)
-{
-RCC.B.BYPASS=1;
-
-}
-
-
-
-
+/********************************************************************************************/
 
 
 return State;
