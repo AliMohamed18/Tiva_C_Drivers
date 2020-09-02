@@ -115,7 +115,7 @@ else if (Mcu_Config[ClockSetting].CLOCK_FREQ==MCU_CLOCK_FREQ_16){
 RCC.B.USESYSDIV=0;	
 }
 }
-State=Mcu_GetPllStatus();
+State=Mcu_DistributePllClock();
 
 
 /****************************************Enable Gates****************************************/
