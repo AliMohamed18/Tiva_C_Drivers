@@ -228,7 +228,7 @@ uint32 	                           : 15 ;
 
 
 typedef struct {
-uint32 MOSCDIS                     : 4  ;
+uint32 MOSCDIS                     : 1  ;
 uint32                             : 3  ;
 uint32 OSCSRC                      : 2  ;
 uint32 XTAL                        : 5  ;
@@ -263,9 +263,114 @@ uint32 USERCC2                     : 1  ;
 }RCC2_BF;
 
 typedef struct{
-uint32 														 : 31 ;
 uint32 LOCK								  			 : 1  ;
+uint32 														 : 31 ;
 }PLLSTAT_BF;	
+
+typedef struct{
+uint32 R0								  			   : 1  ;
+uint32 R1								  	 		   : 1  ;	
+uint32 														 : 30 ;
+}RCGCWD_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;	
+uint32 R1								  			   : 1  ;
+uint32 R2								  	 		   : 1  ;
+uint32 R3								  			   : 1  ;
+uint32 R4								  	 		   : 1  ;
+uint32 R5								  			   : 1  ;
+uint32 														 : 26 ;	
+}RCGCTIMER_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;	
+uint32 R1								  			   : 1  ;
+uint32 R2								  	 		   : 1  ;
+uint32 R3								  			   : 1  ;
+uint32 R4								  	 		   : 1  ;
+uint32 R5								  			   : 1  ;
+uint32 														 : 26 ;	
+}RCGCGPIO_BF;
+
+typedef struct{
+uint32 R0 								  			 : 1  ;
+uint32 														 : 31 ;
+}RCGCDMA_BF;
+
+typedef struct{
+uint32 R0 								  			 : 1  ;
+uint32 														 : 31 ;
+}RCGCHIB_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;	
+uint32 R1								  			   : 1  ;
+uint32 R2								  	 		   : 1  ;
+uint32 R3								  			   : 1  ;
+uint32 R4								  	 		   : 1  ;
+uint32 R5								  			   : 1  ;
+uint32 R6								  			   : 1  ;
+uint32 R7								  			   : 1  ;	
+uint32 														 : 24 ;	
+}RCGCUART_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;	
+uint32 R1								  			   : 1  ;
+uint32 R2								  	 		   : 1  ;
+uint32 R3								  			   : 1  ;	
+uint32 														 : 28 ;	
+}RCGCSSI_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;	
+uint32 R1								  			   : 1  ;
+uint32 R2								  	 		   : 1  ;
+uint32 R3								  			   : 1  ;	
+uint32 														 : 28 ;	
+}RCGCI2C_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;		
+uint32 														 : 31 ;	
+}RCGCUSB_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;
+uint32 R1								  			   : 1  ;			
+uint32 														 : 30 ;	
+}RCGCCAN_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;
+uint32 R1								  			   : 1  ;			
+uint32 														 : 30 ;	
+}RCGCADC_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;
+uint32 														 : 31 ;	
+}RCGCACMP_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;
+uint32 R1								  			   : 1  ;			
+uint32 														 : 30 ;	
+}RCGCPWM_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;
+uint32 R1								  			   : 1  ;			
+uint32 														 : 30 ;	
+}RCGCQEI_BF;
+
+typedef struct{
+uint32 R0								  			   : 1  ;
+uint32 														 : 31 ;	
+}RCGCEEPROM_BF;
+
+
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  /*                                                                  _PERIPHERALS_TAG_                                                                          */
@@ -369,6 +474,89 @@ typedef union{
     PLLSTAT_BF B;	
 }PLLSTAT_TAG;
 
+typedef union{
+    uint32 R;
+    RCGCWD_BF B;	
+}RCGCWD_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCTIMER_BF B;	
+}RCGCTIMER_TAG;
+typedef union{
+    uint32 R;
+    RCGCGPIO_BF B;	
+}RCGCGPIO_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCDMA_BF B;	
+}RCGCDMA_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCHIB_BF B;	
+}RCGCHIB_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCUART_BF B;	
+}RCGCUART_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCSSI_BF B;	
+}RCGCSSI_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCI2C_BF B;	
+}RCGCI2C_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCUSB_BF B;	
+}RCGCUSB_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCCAN_BF B;	
+}RCGCCAN_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCADC_BF B;	
+}RCGCADC_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCACMP_BF B;	
+}RCGCACMP_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCPWM_BF B;	
+}RCGCPWM_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCQEI_BF B;	
+}RCGCQEI_TAG;
+
+typedef union{
+    uint32 R;
+    RCGCEEPROM_BF B;	
+}RCGCEEPROM_TAG;
+
+
+
+
+
+
+
+
+
+
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
@@ -386,6 +574,23 @@ typedef union{
 #define RCC 								(*((volatile RCC_TAG*      )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x060)))
 #define RCC2 								(*((volatile RCC2_TAG*     )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x070)))
 #define PLLSTAT 						(*((volatile PLLSTAT_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x168)))
+#define RCGCWD 						  (*((volatile RCGCWD_TAG*   )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x600)))
+#define RCGCTIMER 					(*((volatile RCGCTIMER_TAG*)(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x604)))
+#define RCGCGPIO 						(*((volatile RCGCGPIO_TAG* )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x608)))
+#define RCGCDMA 						(*((volatile RCGCDMA_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x60C)))
+#define RCGCHIB 					  (*((volatile RCGCHIB_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x614)))
+#define RCGCUART 						(*((volatile RCGCUART_TAG* )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x618)))
+#define RCGCSSI 						(*((volatile RCGCSSI_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x61C)))
+#define RCGCI2C 						(*((volatile RCGCI2C_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x620)))
+#define RCGCUSB 						(*((volatile RCGCUSB_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x628)))
+#define RCGCCAN 						(*((volatile RCGCCAN_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x634)))
+#define RCGCADC 						(*((volatile RCGCADC_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x638)))
+#define RCGCACMP 						(*((volatile RCGCACMP_TAG* )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x63C)))
+#define RCGCPWM 						(*((volatile RCGCPWM_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x640)))
+#define RCGCQEI 						(*((volatile RCGCQEI_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x644)))
+#define RCGCEEPROM 				 (*((volatile RCGCEEPROM_TAG*)(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x658)))
+
+	
 
 
 
@@ -417,7 +622,7 @@ typedef union{
 
 
 
- NVIC_PRI_BF NVIC_PRIX[35] __attribute__((at(NVIC_PRIX_BASE_ADDRESS))) ;// Warning 
+extern NVIC_PRI_BF NVIC_PRIX[35] __attribute__((at(NVIC_PRIX_BASE_ADDRESS))) ;// Warning 
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
