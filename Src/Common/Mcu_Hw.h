@@ -76,7 +76,7 @@ uint32                             : 5  ;
 uint32 PRIGROUP                    : 3  ;
 uint32                             : 4  ;
 uint32 ENDIANESS                   : 1  ;
-uint32 VECTKEY				       : 16 ;
+uint32 VECTKEY				     			   : 16 ;
 }APINT_BF;
 
 
@@ -200,14 +200,14 @@ uint32 ADDR                        : 32 ;
 
 
 typedef struct{	
-uint32 							   : 5	;	
-uint32 INT_NUM_0_IN_PRI		       : 3	;	
-uint32 							   : 5	;	
-uint32 INT_NUM_1_IN_PRI			   : 3	;	
-uint32 							   : 5	;	
-uint32 INT_NUM_2_IN_PRI			   : 3	;	
-uint32 							   : 5	;	
-uint32 INT_NUM_3_IN_PRI			   : 3	;
+uint32 							   						 : 5	;	
+uint32 INT_NUM_0_IN_PRI		       	 : 3	;	
+uint32 							  						 : 5	;	
+uint32 INT_NUM_1_IN_PRI			   		 : 3	;	
+uint32 							   						 : 5	;	
+uint32 INT_NUM_2_IN_PRI			    	 : 3	;	
+uint32 							    	 		 	   : 5	;	
+uint32 INT_NUM_3_IN_PRI			   		 : 3	;
 }NVIC_PRI_BF;
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,7 +223,7 @@ uint32 SW                          : 1  ;
 uint32 WDT1                        : 1  ;
 uint32                             : 10 ;
 uint32 MOSCFAIL                    : 1  ;
-uint32 EXT                         : 15 ;	
+uint32 	                           : 15 ;	
 }RESC_BF;
 
 
@@ -261,6 +261,11 @@ uint32                             : 1  ;
 uint32 DIV400                      : 1  ;
 uint32 USERCC2                     : 1  ;
 }RCC2_BF;
+
+typedef struct{
+uint32 														 : 31 ;
+uint32 LOCK								  			 : 1  ;
+}PLLSTAT_BF;	
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  /*                                                                  _PERIPHERALS_TAG_                                                                          */
@@ -359,6 +364,10 @@ typedef union{
     RCC2_BF B;	
 }RCC2_TAG;
 
+typedef union{
+    uint32 R;
+    PLLSTAT_BF B;	
+}PLLSTAT_TAG;
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
@@ -376,6 +385,8 @@ typedef union{
 #define RESC								(*((volatile RESC_TAG*     )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x05C)))
 #define RCC 								(*((volatile RCC_TAG*      )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x060)))
 #define RCC2 								(*((volatile RCC2_TAG*     )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x070)))
+#define PLLSTAT 						(*((volatile PLLSTAT_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x168)))
+
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
