@@ -32,8 +32,8 @@ typedef enum {
 typedef enum{
 MCU_CLOCK_FREQ_8 = 0 ,
 MCU_CLOCK_FREQ_16    ,
-MCU_CLOCK_FREQ_20    ,	
-MCU_CLOCK_FREQ_40	
+MCU_CLOCK_FREQ_40    ,	
+MCU_CLOCK_FREQ_80	
 }Mcu_FreqType; 
 
 
