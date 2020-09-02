@@ -20,16 +20,7 @@
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
-#define MOSC_CIRCUIT_FAIL_RESET 	0
-#define WATCHDOG_TIMER_1_RESET		1
-#define SOFTWARE_RESET			  		2
-#define WATCHDOG_TIMER_0_RESET 		3
-#define BROWN_OUT_RESET         	4
-#define POWER_ON_RESET						5
-#define EXTERNAL_RESET          	6
 
-#define PLL_UNPOWERED_OR_NOT_LOCKED_YET 0
-#define PLL_POWERED_AND_LOCKED 1
 
 typedef enum {
 	MCU_CLOCK_SOURCE_MOSC	=	0		,
