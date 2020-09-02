@@ -74,7 +74,7 @@ void Mcu_Init ( const Mcu_ConfigType* ConfigPtr );
 * \Parameters (out): None                                                      
 * \Return value:   : Std_ReturnType 
 *******************************************************************************/
-Std_ReturnType Mcu_InitClock( Mcu_ClockSourceType ClockSetting );
+Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting );
 
 
 /******************************************************************************
