@@ -22,7 +22,7 @@
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 #define NUMBER_OF_ACTIVATED_GATES 8
-#define NUMBER_OF_ACTIVATED_CLOCK_MODE 6
+#define NUMBER_OF_ACTIVATED_CLOCK_MODE 9
 
 #define PLL_UNPOWERED_OR_NOT_LOCKED_YET 0
 #define PLL_POWERED_AND_LOCKED 1
@@ -42,7 +42,6 @@ typedef enum {
  MCU_GPIOD_ENABLE_CLOCK ,
  MCU_GPIOE_ENABLE_CLOCK ,
  MCU_GPIOF_ENABLE_CLOCK ,
- MCU_GPIOA_ENABLE_CLOCK ,
 	
 MCU_WATCHDOG_0_ENABLE_CLOCK ,
 MCU_WATCHDOG_1_ENABLE_CLOCK ,
