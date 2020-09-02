@@ -27,13 +27,14 @@
 #define PLL_UNPOWERED_OR_NOT_LOCKED_YET 0
 #define PLL_POWERED_AND_LOCKED 1
 
-#define	MCU_CLOCK_0			0
-#define	MCU_CLOCK_1			1
-#define	MCU_CLOCK_2			2
-#define	MCU_CLOCK_3			3
-#define	MCU_CLOCK_4			4
-#define	MCU_CLOCK_5			5
-
+typedef enum{
+	MCU_CLOCK_0		=	0,
+	MCU_CLOCK_1			,
+	MCU_CLOCK_2			,
+	MCU_CLOCK_3			,
+	MCU_CLOCK_4			,
+	MCU_CLOCK_5			
+}Mcu_ClockType;
 typedef enum {
  MCU_GPIOA_ENABLE_CLOCK ,
  MCU_GPIOB_ENABLE_CLOCK ,
