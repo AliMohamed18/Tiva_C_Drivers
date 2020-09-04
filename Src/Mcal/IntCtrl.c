@@ -14,10 +14,12 @@
  *********************************************************************************************************************/
 #include "IntCtrl.h"
 
+
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/	
- 
+ extern const Interrupt_CfgType  Interrupt_Groups[];
+
 /**********************************************************************************************************************
  *  LOCAL DATA 
  *********************************************************************************************************************/
@@ -52,7 +54,7 @@
 *******************************************************************************/
 void IntCrtl_Init(void)
 {
-uint8 Counter , Group_Temp , SubGroup_Temp , Interrupt_Number_Temp ,POSINTION_IN_PRIX ,PRIX_NUMBER	;
+uint8 Counter , PRIGROUP_CHOICE , Group_Temp , SubGroup_Temp , Interrupt_Number_Temp ,POSINTION_IN_PRIX ,PRIX_NUMBER	;
 	
 APINT.B.VECTKEY=APINT_VECTKEY; 					 // Field Guard
 APINT.B.ENDIANESS=STD_low;							 //Little-Endian Mode
@@ -79,7 +81,7 @@ APINT.B.PRIGROUP = PRIGROUP_CHOICE;        //The Split Of Group Priority From Su
 
 __asm ("CPSID i"); // Disable all interrupts first then enable used interrupts only	
 
-for(Counter=0 ;Counter < NUMBER_OF_ACTIVATED_GROUPS;Counter++){
+for(Counter=0 ;Counter < NUM_OF_ACTIVATED_GROUPS;Counter++){
 	
 Interrupt_Number_Temp = Interrupt_Groups[Counter].Interrupt_Number;	
 Group_Temp = Interrupt_Groups[Counter].Group_Priority;
