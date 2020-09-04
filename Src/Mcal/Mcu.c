@@ -16,7 +16,10 @@
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/	
- 
+const extern  uint8 MCU_ACTIVATED_GATES[];
+const	 extern  Mcu_ConfigType McuConfig[];
+
+
 /**********************************************************************************************************************
  *  LOCAL DATA 
  *********************************************************************************************************************/
@@ -211,6 +214,10 @@ else if	(RESC.B.POR 		==1) ResetRawValue=POWER_ON_RESET;
 else if	(RESC.B.EXT 		==1) ResetRawValue=EXTERNAL_RESET;
 else if	(RESC.B.MOSCFAIL==1) ResetRawValue=MOSC_CIRCUIT_FAIL_RESET;	
 	
+	
+	// Clear
+
+	
 	return ResetRawValue;
 }
 
@@ -227,7 +234,6 @@ void Mcu_PerformReset(void){
 	
 APINT.B.VECTKEY=APINT_VECTKEY;
 APINT.B.SYSRESREQ=1;
-
 }
 
 /******************************************************************************
