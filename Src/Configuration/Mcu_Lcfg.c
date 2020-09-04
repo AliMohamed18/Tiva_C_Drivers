@@ -21,12 +21,12 @@
 /**********************************************************************************************************************
  *  LOCAL DATA 
  *********************************************************************************************************************/
- 
+
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
  
-const uint8 MCU_ACTIVATED_GATES[NUMBER_OF_ACTIVATED_GATES]={
+ const  uint8 MCU_ACTIVATED_GATES[NUMBER_OF_ACTIVATED_GATES]={
  MCU_GPIOA_ENABLE_CLOCK ,
  MCU_GPIOB_ENABLE_CLOCK ,
  MCU_GPIOC_ENABLE_CLOCK ,
@@ -37,7 +37,7 @@ const uint8 MCU_ACTIVATED_GATES[NUMBER_OF_ACTIVATED_GATES]={
  MCU_WATCHDOG_1_ENABLE_CLOCK 
  };
 
- const Mcu_ConfigType McuConfig[NUMBER_OF_ACTIVATED_CLOCK_MODE]=
+ const  Mcu_ConfigType McuConfig[NUMBER_OF_ACTIVATED_CLOCK_MODE]=
 {
 	{MCU_CLOCK_SOURCE_MOSC						,PLL_POWERED_AND_LOCKED								,MCU_CLOCK_FREQ_8		},
 	{MCU_CLOCK_SOURCE_MOSC						,PLL_POWERED_AND_LOCKED								,MCU_CLOCK_FREQ_16	},
