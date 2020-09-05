@@ -566,6 +566,48 @@ typedef union{
 
 #define NVIC_PRIX_BASE_ADDRESS					  (CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x400)
 
+#define GPIO_PORTA_APB_BASE_ADDRESS 						0x40004000
+#define GPIO_PORTA_AHB_BASE_ADDRESS 						0x40058000
+#define GPIO_PORTB_APB_BASE_ADDRESS 						0x40005000
+#define GPIO_PORTB_AHB_BASE_ADDRESS 						0x40059000
+#define GPIO_PORTC_APB_BASE_ADDRESS 						0x40006000
+#define GPIO_PORTC_AHB_BASE_ADDRESS 						0x4005A000
+#define GPIO_PORTD_APB_BASE_ADDRESS 						0x40007000
+#define GPIO_PORTD_AHB_BASE_ADDRESS 						0x4005B000
+#define GPIO_PORTE_APB_BASE_ADDRESS 						0x40024000
+#define GPIO_PORTE_AHB_BASE_ADDRESS 						0x4005C000
+#define GPIO_PORTF_APB_BASE_ADDRESS 						0x40025000
+#define GPIO_PORTF_AHB_BASE_ADDRESS 						0x4005D000
+
+
+#define GPIODATA_OFFSET 												0x000
+#define GPIODIR_OFFSET 													0x400
+#define GPIOIS_OFFSET 													0x404
+#define GPIOIBE_OFFSET 													0x408
+#define GPIOIEV_OFFSET 													0x40C
+#define GPIOIM_OFFSET 													0x410
+#define GPIORIS_OFFSET 													0x414
+#define GPIOMIS_OFFSET 													0x418
+#define GPIOICR_OFFSET 													0x41C
+#define GPIOAFSEL_OFFSET 												0x420
+#define GPIODR2R_OFFSET 												0x500
+#define GPIODR4R_OFFSET 												0x504
+#define GPIODR8R_OFFSET 												0x508
+#define GPIOODR_OFFSET 													0x50C
+#define GPIOPUR_OFFSET 													0x510
+#define GPIOPDR_OFFSET 													0x514
+#define GPIOSLR_OFFSET 													0x518
+#define GPIODEN_OFFSET 													0x51C
+#define GPIOLOCK_OFFSET 												0x520
+#define GPIOCR_OFFSET 													0x524
+#define GPIOAMSEL_OFFSET 												0x528
+#define GPIOPCTL_OFFSET 												0x52C
+#define GPIOADCCTL_OFFSET 											0x530
+#define GPIODMACTL_OFFSET 											0x534
+
+
+
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  /*                                                            _SYSTEM_CONTROL_ADDRESS_                                                                         */
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -589,8 +631,6 @@ typedef union{
 #define RCGCPWM 						(*((volatile RCGCPWM_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x640)))
 #define RCGCQEI 						(*((volatile RCGCQEI_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x644)))
 #define RCGCEEPROM 				 (*((volatile RCGCEEPROM_TAG*)(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x658)))
-
-	
 
 
 
@@ -622,7 +662,7 @@ typedef union{
 
 //#pragma address ( NVIC_PRIX[]= NVIC_PRIX_BASE_ADDRESS) NVIC_PRI_BF  NVIC_PRIX[35];
 
- NVIC_PRI_BF NVIC_PRIX[35]  __attribute__((at(NVIC_PRIX_BASE_ADDRESS))); 
+NVIC_PRI_BF NVIC_PRIX[35]  __attribute__((at(NVIC_PRIX_BASE_ADDRESS))); 
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
