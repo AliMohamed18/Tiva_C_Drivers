@@ -29,12 +29,12 @@
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
-#define SET(REG,BIT)	      ((uint32)(REG|=(1<<BIT)))
-#define CLR(REG,BIT)	      ((uint32)(REG &=~(1<<BIT)))
-#define GET(REG,BIT) 	      ((uint32)((REG>>BIT)&1)))
-#define TOGGLE(REG,BIT)     ((uint32)(REG^=(1<<BIT)))
-#define Preiph_BB(REG,BIT)  ((uint32)(PREIPHRAL_BB_ALIAS_BASE+((REG-PREIPHRAL_BASE)*32)+(BIT*4)))
-#define RAM_BB(REG,BIT)     ((uint32)(SRAM_BB_ALIAS_BASE+((REG-SRAM_BASE)*32)+(BIT*4)))
+#define SET(REG,BIT)	      (REG|=(1<<BIT))
+#define CLR(REG,BIT)	      (REG &=~(1<<BIT))
+#define GET(REG,BIT) 	      ((REG>>BIT)&1)
+#define TOGGLE(REG,BIT)     (REG^=(1<<BIT))
+#define Preiph_BB(REG,BIT)  (PREIPHRAL_BB_ALIAS_BASE+((REG-PREIPHRAL_BASE)*32)+(BIT*4))
+#define RAM_BB(REG,BIT)     (SRAM_BB_ALIAS_BASE+((REG-SRAM_BASE)*32)+(BIT*4))
 
 
  
