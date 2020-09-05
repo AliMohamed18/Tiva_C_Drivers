@@ -25,19 +25,23 @@
 
 #define FALSE 0
 #define TRUE 1		
-
-#define E_OK 0
-#define E_NOT_OK 1   	
+  	
  
-#define STD_low 0
-#define STD_high 1	
+typedef enum
+{
+	STD_low=0,
+	STD_high 
+}STD_levelType;	
 
 
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
 
-typedef uint8 Std_ReturnType;
+typedef enum {
+E_OK=0 ,
+E_NOT_OK 
+}Std_ReturnType;
 
  
 #endif  /* STD_TYPES_H */
