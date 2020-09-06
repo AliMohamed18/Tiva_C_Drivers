@@ -36,12 +36,12 @@ const Port_ConfigType Port_Config[NUMBER_OF_ACTIVATED_CHANNELS]=
 	{  PF4     ,Output   	,F4_DIO       		,DEFAULT   	,CURRENT_NA	},
 	{  PD0     ,Output  	,D0_SSI3Clk				,DEFAULT   	,CURRENT_NA	},
 	{  PD1     ,Output  	,D1_SSI3Fss				,DEFAULT   	,CURRENT_NA	},
-	{  PD2     ,Input  		,D2_SSI3Rx				,DEFAULT   	,CURRENT_NA	},
+	{  PD2     ,Input  		,D2_SSI3Rx				,PULLDOWN   ,CURRENT_NA	},
 	{  PD3     ,Output  	,D3_SSI3Tx				,DEFAULT   	,CURRENT_NA	},
-	{  PD4     ,Input  		,D4_DIO           ,DEFAULT   	,CURRENT_NA	},
-	{  PD5     ,Input  		,D5_DIO         	,PULLUP   	,CURRENT_NA	},
+	{  PD4     ,Input  		,D4_DIO           ,PULLUP   	,CURRENT_NA	},
+	{  PD5     ,Input  		,D5_DIO         	,PULLDOWN   ,CURRENT_NA	},
 	{  PD6     ,Input  		,D6_DIO           ,PULLDOWN   ,CURRENT_NA	},
-	{  PD7     ,Input  		,D7_DIO           ,OPENDRAIN  ,CURRENT_NA	}
+	{  PD7     ,Output  	,D7_DIO           ,OPENDRAIN  ,CURRENT_NA	}
 };
 
 /**********************************************************************************************************************
