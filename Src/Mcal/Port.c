@@ -73,7 +73,6 @@ Temp_Attach=ConfigPtr[Counter].Attach;
 Port=Temp_Pin/8;
 Pin=Temp_Pin%8;
 	
-(*((volatile uint32*)(Port_BaseAddress[Port] + GPIODEN_OFFSET  ))) |= ((uint8)(1<< Pin)); // GPIO Digital Enable 
 (*((volatile uint32*)(Port_BaseAddress[Port] + GPIOLOCK_OFFSET ))) |= UNLOCK_KEY; 				// GPIO Unlock 
 (*((volatile uint32*)(Port_BaseAddress[Port] + GPIOCR_OFFSET 	 ))) |= ((uint8)(1<< Pin)); // GPIO Digital Enable 
 
@@ -88,16 +87,14 @@ if			 (Temp_Current==CURRENT_2M) (*((volatile uint32*)(Port_BaseAddress[Port] + 
 else if	 (Temp_Current==CURRENT_4M) (*((volatile uint32*)(Port_BaseAddress[Port] + GPIODR4R_OFFSET  ))) |= (1<< Pin); 
 else if	 (Temp_Current==CURRENT_8M) (*((volatile uint32*)(Port_BaseAddress[Port] + GPIODR8R_OFFSET  ))) |= (1<< Pin); 
 
-if			 (Temp_Mode==DIO)				(*((volatile uint32*)(Port_BaseAddress[Port] + GPIOAFSEL_OFFSET  ))) &=(~(1<< Pin));
+if			 (Temp_Mode==DIO)	{
+(*((volatile uint32*)(Port_BaseAddress[Port] + GPIODEN_OFFSET  ))) |= ((uint8)(1<< Pin)); // GPIO Digital Enable 
+(*((volatile uint32*)(Port_BaseAddress[Port] + GPIOAFSEL_OFFSET  ))) &=(~(1<< Pin));
+}
+
 else{
-(*((volatile uint32*)(Port_BaseAddress[Port] + GPIOAFSEL_OFFSET  )))|= (1<< Pin); 	
-	
-	
-	
-	
-	
-	
-	
+(*((volatile uint32*)(Port_BaseAddress[Port] + GPIOAFSEL_OFFSET  )))|= (1<< Pin);
+(*((volatile uint32*)(Port_BaseAddress[Port] + GPIOPCTL_OFFSET   )))|= ((uint8)(Temp_Mode << (4 * Pin)));
 }
 }
 }
