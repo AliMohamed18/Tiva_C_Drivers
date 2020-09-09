@@ -370,7 +370,33 @@ uint32 R0								  			   : 1  ;
 uint32 														 : 31 ;	
 }RCGCEEPROM_BF;
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /*                                                                   _WATCHDOG_                                                                          */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+typedef struct{
+uint32 INTEN										   : 1  ;
+uint32 RESEN											 : 1  ;	
+uint32 INTTYPE										 : 1  ;	
+uint32 														 : 28 ;	
+uint32 WRC						  					 : 1  ;	
+}WDTCTL_BF;
+
+typedef struct{
+uint32 WDTRIS								  	   : 1  ;
+uint32 														 : 31 ;	
+}WDTRIS_BF;
+
+typedef struct{
+uint32 WDTMIS								  	   : 1  ;
+uint32 														 : 31 ;	
+}WDTMIS_BF;
+
+typedef struct{
+uint32 														 : 8  ;		
+uint32 STALL								  	   : 1  ;
+uint32 														 : 23 ;	
+}WDTTEST_BF;
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  /*                                                                  _PERIPHERALS_TAG_                                                                          */
@@ -547,11 +573,28 @@ typedef union{
     uint32 R;
     RCGCEEPROM_BF B;	
 }RCGCEEPROM_TAG;
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /*                                                                _WATCHDOG_TAG_                                                                         */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+typedef union{
+    uint32 R;
+    WDTCTL_BF B;
+}WDTCTL_TAG;
 
+typedef union{
+    uint32 R;
+    WDTRIS_BF B;
+}WDTRIS_TAG;
 
+typedef union{
+    uint32 R;
+    WDTMIS_BF B;
+}WDTMIS_TAG;
 
-
-
+typedef union{
+    uint32 R;
+    WDTTEST_BF B;
+}WDTTEST_TAG;
 
 
 
@@ -563,6 +606,8 @@ typedef union{
 
 #define CORTEX_M4_PERIPHERALS_BASE_ADDRESS      0xE000E000 
 #define CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS   0x400FE000
+
+#define WATCHDOG_1_BASE_ADDRESS  								0x40001000
 
 #define NVIC_PRIX_BASE_ADDRESS					  (CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x400)
 
@@ -630,8 +675,20 @@ typedef union{
 #define RCGCACMP 						(*((volatile RCGCACMP_TAG* )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x63C)))
 #define RCGCPWM 						(*((volatile RCGCPWM_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x640)))
 #define RCGCQEI 						(*((volatile RCGCQEI_TAG*  )(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x644)))
-#define RCGCEEPROM 				 (*((volatile RCGCEEPROM_TAG*)(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x658)))
+#define RCGCEEPROM 				  (*((volatile RCGCEEPROM_TAG*)(CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS+0x658)))
+	
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /*                                                            __WATCHDOG_ADDRESS_                                                                           */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#define WDTLOAD 				 		(*((volatile uint32*			 )(WATCHDOG_1_BASE_ADDRESS+0x000)))
+#define WDTVALUE 				 		(*((volatile uint32*			 )(WATCHDOG_1_BASE_ADDRESS+0x004)))
+#define WDTCTL              (*((volatile WDTCTL_TAG*   )(WATCHDOG_1_BASE_ADDRESS+0x008)))
+#define WDTICR 				   		(*((volatile uint32*			 )(WATCHDOG_1_BASE_ADDRESS+0x00C)))
+#define WDTRIS              (*((volatile WDTRIS_TAG*   )(WATCHDOG_1_BASE_ADDRESS+0x010)))
+#define WDTMIS              (*((volatile WDTMIS_TAG*   )(WATCHDOG_1_BASE_ADDRESS+0x014)))
+#define WDTTEST             (*((volatile WDTTEST_TAG*  )(WATCHDOG_1_BASE_ADDRESS+0x418)))
+#define WDTLOCK 				   	(*((volatile uint32*			 )(WATCHDOG_1_BASE_ADDRESS+0xC00)))
 
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
