@@ -21,8 +21,7 @@
 *********************************************************************************************************************/
 #define MCU_FREQ 8
 
-extern Wdg_ConfigType Wdg_Config;
-extern volatile  WdgMaxTimeout	MaxTimeout_Temp;
+volatile  WdgMaxTimeout	MaxTimeout_Temp;
 
 /**********************************************************************************************************************
  *  LOCAL DATA 
