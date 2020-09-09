@@ -717,9 +717,7 @@ typedef union{
 #define EN3                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x10C)))
 #define EN4                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x110)))
 
-//#pragma address ( NVIC_PRIX[]= NVIC_PRIX_BASE_ADDRESS) NVIC_PRI_BF  NVIC_PRIX[35];
 
-NVIC_PRI_BF NVIC_PRIX[35]  __attribute__((at(NVIC_PRIX_BASE_ADDRESS))); 
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES
