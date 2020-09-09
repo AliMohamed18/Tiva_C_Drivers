@@ -87,11 +87,14 @@ void Wdg_Init ( const Wdg_ConfigType* ConfigPtr )
 
   WDTLOCK=0;
 		
-		
-	
+}
+/*
+void Interrupt_Watchdog_Timers_0_and_1(void){
+
+CALLBACK_FUNCTION_PTR();
 	
 }
-
+*/
 /******************************************************************************
 * \Syntax          : void Wdg_SetTriggerCondition ( uint16 timeout )        
 * \Description     : Describe this service                                    
