@@ -22,7 +22,7 @@
 #define MCU_FREQ 8
 
 extern Wdg_ConfigType Wdg_Config;
-volatile WdgMaxTimeout	MaxTimeout_Temp;
+extern volatile  WdgMaxTimeout	MaxTimeout_Temp;
 
 /**********************************************************************************************************************
  *  LOCAL DATA 
@@ -31,6 +31,9 @@ volatile WdgMaxTimeout	MaxTimeout_Temp;
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
+
+typedef void (*Ptr2FuncType)(void);
+Ptr2FuncType CallBackPtr = NULL;
 
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
@@ -87,14 +90,20 @@ void Wdg_Init ( const Wdg_ConfigType* ConfigPtr )
 
   WDTLOCK=0;
 		
-}
-/*
-void Interrupt_Watchdog_Timers_0_and_1(void){
+	CallBackPtr = CALL_BACK_FUNC_PTR;
 
-CALLBACK_FUNCTION_PTR();
-	
+		
 }
-*/
+
+void WDT0_Handler(void){
+
+	if(CallBackPtr != NULL)
+	{
+		CallBackPtr();
+		
+	}	
+}
+
 /******************************************************************************
 * \Syntax          : void Wdg_SetTriggerCondition ( uint16 timeout )        
 * \Description     : Describe this service                                    
