@@ -69,13 +69,6 @@ Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting ){
 Std_ReturnType State= E_NOT_OK;
 
 	
-if(Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_MOSC){
-	RCC.B.MOSCDIS=0;
-	RCC.B.OSCSRC=0x0;
-}
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC) 				RCC.B.OSCSRC=0x1;
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC_DIV_4) 	RCC.B.OSCSRC=0x2;
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_LFIOSC) 				RCC.B.OSCSRC=0x3;
 
 if(Mcu_Config[ClockSetting].PLL_STATE==PLL_POWERED_AND_LOCKED)
 {
@@ -214,8 +207,8 @@ else if	(RESC.B.POR 		==1) ResetRawValue=POWER_ON_RESET;
 else if	(RESC.B.EXT 		==1) ResetRawValue=EXTERNAL_RESET;
 else if	(RESC.B.MOSCFAIL==1) ResetRawValue=MOSC_CIRCUIT_FAIL_RESET;	
 	
-	
-	// Clear
+RESC.R = 0;	
+
 
 	
 	return ResetRawValue;
@@ -231,7 +224,7 @@ else if	(RESC.B.MOSCFAIL==1) ResetRawValue=MOSC_CIRCUIT_FAIL_RESET;
 * \Return value:   : none
 *******************************************************************************/
 void Mcu_PerformReset(void){
-	
+RESC.R = 0;	
 APINT.B.VECTKEY=APINT_VECTKEY;
 APINT.B.SYSRESREQ=1;
 }
