@@ -68,7 +68,13 @@ Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting ){
 	uint8 Counter =0 , Gate_Temp=0 ;	
 Std_ReturnType State= E_NOT_OK;
 
-	
+if(Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_MOSC){
+	RCC.B.MOSCDIS=0;
+	RCC.B.OSCSRC=0x0;
+}
+else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC) 				RCC.B.OSCSRC=0x1;
+else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC_DIV_4) 	RCC.B.OSCSRC=0x2;
+else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_LFIOSC) 				RCC.B.OSCSRC=0x3;
 
 if(Mcu_Config[ClockSetting].PLL_STATE==PLL_POWERED_AND_LOCKED)
 {
