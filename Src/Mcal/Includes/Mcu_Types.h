@@ -52,7 +52,7 @@ typedef uint8 Mcu_RawResetType ;
 typedef uint8 Mcu_PllStatusType ;
 typedef struct{
 	Mcu_ClockSourceType CLOCK_SOURCE ;
-	uint8 PLL_STATE ;
+	Mcu_PllStatusType PLL_STATE ;
 	Mcu_FreqType CLOCK_FREQ   ;
 }Mcu_ConfigType;
 
