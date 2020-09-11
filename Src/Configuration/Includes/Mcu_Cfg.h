@@ -21,8 +21,8 @@
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
-#define NUMBER_OF_ACTIVATED_GATES 8
-#define NUMBER_OF_ACTIVATED_CLOCK_MODE 14
+#define NUMBER_OF_ACTIVATED_GATES 1
+#define NUMBER_OF_ACTIVATED_CLOCK_MODE 6
 
 #define PLL_UNPOWERED_OR_NOT_LOCKED_YET 0
 #define PLL_POWERED_AND_LOCKED 1
@@ -34,14 +34,6 @@ typedef enum{
 	MCU_CLOCK_3			,
 	MCU_CLOCK_4			,
 	MCU_CLOCK_5			,
-	MCU_CLOCK_6			,
-	MCU_CLOCK_7			,
-	MCU_CLOCK_8			,
-	MCU_CLOCK_9			,
-	MCU_CLOCK_10		,
-	MCU_CLOCK_11		,
-	MCU_CLOCK_12		,
-	MCU_CLOCK_13		,
 	
 }Mcu_ClockType;
 typedef enum {
