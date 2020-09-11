@@ -1,15 +1,16 @@
-//#include "Mcu.h"
+#include "Mcu.h"
 #include "Port.h"
 #include "Dio.h"
 
 int main(void)
  { 	
-
-   Port_Init(Port_Config);
-	 Dio_WriteChannel(Dio_Channel_F4,STD_high);
+	Mcu_InitClock(MCU_CLOCK_0);
+	 Port_Init(Port_Config);
 
 while(1){
-	
+		 Dio_WriteChannel(Dio_Channel_F4,STD_high);
+
+
 	}
 return 0;
 }
