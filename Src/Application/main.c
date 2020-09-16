@@ -4,11 +4,11 @@
 
 int main(void)
  { 	
-	Mcu_InitClock(MCU_CLOCK_0);
+	 Mcu_InitClock(MCU_CLOCK_0);
 	 Port_Init(Port_Config);
 
 while(1){
-		 Dio_WriteChannel(Dio_Channel_F4,STD_high);
+		 Dio_WriteChannel(Dio_Channel_F2,STD_high);
 
 
 	}
