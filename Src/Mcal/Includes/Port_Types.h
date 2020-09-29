@@ -69,13 +69,18 @@ PE1,
 PE2,
 PE3,
 PE4,
-PE5,	
+PE5,
+PE6,
+PE7,
 	
 PF0,
 PF1,
 PF2,
 PF3,
-PF4	
+PF4,
+PF5,
+PF6,
+PF7
 }Port_PinType;
 
 typedef enum
