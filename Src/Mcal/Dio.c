@@ -99,7 +99,7 @@ uint8 portPos,channelPos;
 	portPos = ChannelId / 8;
 	channelPos = ChannelId % 8;
 	
-	(*((volatile uint32*)(Port_APB_BaseAddress[portPos] + GPIODATA_OFFSET + (4 * (1<<channelPos)) ))) = ((uint8)(Level << channelPos));
+	(*((volatile uint32*)(Port_APB_BaseAddress[portPos] + GPIODATA_OFFSET + (4 * (1<<channelPos)) ))) = ((uint32)(Level << channelPos));
 
 
 }
@@ -135,7 +135,7 @@ portLevel = ((uint8)(*((uint32*)(Port_APB_BaseAddress[PortId]+GPIODATA_OFFSET+0X
 *******************************************************************************/
 void Dio_WritePort( Dio_PortType PortId, Dio_PortLevelType Level ){
 
- *((uint32*)(Port_APB_BaseAddress[PortId]+GPIODATA_OFFSET+0X3FC))=Level ;
+ (*((uint32*)(Port_APB_BaseAddress[PortId]+GPIODATA_OFFSET+0X3FC)))=Level ;
 }
 
 /******************************************************************************
