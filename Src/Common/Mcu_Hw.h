@@ -622,7 +622,9 @@ typedef union{
 
 #define WATCHDOG_1_BASE_ADDRESS  								0x40001000
 
+#define NVIC_ENX_BASE_ADDRESS					    (CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x100)
 #define NVIC_PRIX_BASE_ADDRESS					  (CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x400)
+
 
 #define GPIO_PORTA_APB_BASE_ADDRESS 						0x40004000
 #define GPIO_PORTA_AHB_BASE_ADDRESS 						0x40058000
@@ -752,11 +754,6 @@ typedef union{
 #define MMADDR               (*((volatile MMADDR_TAG*    )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0xD34)))
 #define FAULTADDR            (*((volatile FAULTADDR_TAG* )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0xD38)))
 
-#define EN0                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x100)))
-#define EN1                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x104)))
-#define EN2                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x108)))
-#define EN3                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x10C)))
-#define EN4                 (*((volatile uint32*        )(CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x110)))
 
 
 
