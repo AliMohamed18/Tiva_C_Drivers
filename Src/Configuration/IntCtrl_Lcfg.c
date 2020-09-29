@@ -28,10 +28,6 @@
  *********************************************************************************************************************/
 
 const Interrupt_CfgType Interrupt_Groups[NUM_OF_ACTIVATED_GROUPS]={	
-{ Interrupt_GPIO_Port_A , 1 , 0 },
-{ Interrupt_GPIO_Port_B , 1 , 3 },
-{ Interrupt_GPIO_Port_C , 0 , 2 },
-{ Interrupt_GPIO_Port_D , 1 , 2 },
 { Interrupt_GPIO_Port_E , 0 , 1 },
 { Interrupt_GPIO_Port_F , 0	, 0 }
 };
