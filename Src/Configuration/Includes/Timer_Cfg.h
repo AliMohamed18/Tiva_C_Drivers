@@ -26,7 +26,7 @@
 
 
 
-#define GPT_ACTIVATED_CHANNELS_SIZE						1
+#define GPT_ACTIVATED_CHANNELS_SIZE						2
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
