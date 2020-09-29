@@ -27,6 +27,11 @@
  *  GLOBAL DATA
  *********************************************************************************************************************/
 extern volatile uint32 GlobalSystemClock;
+
+static const Gpt_ConfigType* globalGptConfig;
+
+GptNotification	locGptNotification[MAX_NUMBER_OF_GPIO_GPT];
+
 static const uint32 Gpt_BaseAddress[MAX_NUMBER_OF_GPIO_GPT] = {_16_32_BIT_TIMER_0_BASE_ADDRESS,			
 																															 _16_32_BIT_TIMER_1_BASE_ADDRESS,		
 																															 _16_32_BIT_TIMER_2_BASE_ADDRESS,			
@@ -64,15 +69,20 @@ static const uint32 Gpt_BaseAddress[MAX_NUMBER_OF_GPIO_GPT] = {_16_32_BIT_TIMER_
 *******************************************************************************/
 void Gpt_Init( const Gpt_ConfigType* ConfigPtr)
 {
+	
 	Gpt_ChannelType 						Channel_Temp ;					
 	Gpt_ChannelTickFrequency 		TickFrequency_Temp; 
 	GptChannelTickValueMax  		TickValueMax_Temp;
 	ChannelMode									Mode_Temp;
+	globalGptConfig = ConfigPtr;
+
 for(uint8 Counter =0 ; Counter <GPT_ACTIVATED_CHANNELS_SIZE;	Counter ++){
 Channel_Temp=ConfigPtr[Counter].channel;			
 TickFrequency_Temp=ConfigPtr[Counter].channelTickFreq;	
 TickValueMax_Temp=ConfigPtr[Counter].channelTickMaxValue;	
 Mode_Temp=ConfigPtr[Counter].channelMode;
+locGptNotification[Channel_Temp]= ConfigPtr[Counter].gptNotification;
+	
 	
 (*((volatile uint32*)(Gpt_BaseAddress[Channel_Temp] + GPTMCFG_OFFSET  ))) = 0x4;        // To Use 16-Bit Or 32-Bit Only 
 
@@ -164,8 +174,40 @@ Gpt_ValueType Gpt_GetTimeRemaining( Gpt_ChannelType Channel )
 *******************************************************************************/
 void Gpt_StartTimer( Gpt_ChannelType Channel, Gpt_ValueType Value )
 {
-}
+	uint32 divisor;
+	Gpt_ChannelTickFrequency 	locChannelTickFreq=0;
+	 
+		for(uint8 Counter=0; Counter < MAX_NUMBER_OF_GPIO_GPT ; Counter++)
+	{
+		if (globalGptConfig[Counter].channel == Channel)
+		{
+			locChannelTickFreq = globalGptConfig[Counter].channelTickFreq;			
+			break;
+		}
+	}
+	
+	divisor = GlobalSystemClock / locChannelTickFreq;
+	
+	for(uint8 Counter=2 ;; Counter*=2)
+	{
+		if(divisor/Counter == 1)
+		{
+			if(divisor%Counter <= (Counter/2))
+			{
+				divisor = Counter;
+			}
+			else
+			{
+				divisor = Counter*2;
+			}
+			break;
+		}
+	}
+	
+	(*((volatile uint32*)(Gpt_BaseAddress[Channel] + GPTMTAILR_OFFSET  ))) = Value * divisor;
+	(*((volatile uint32*)(Gpt_BaseAddress[Channel] + GPTMCTL_OFFSET  ))) |= ((uint32)(1<<0));
 
+}
 /******************************************************************************
 * \Syntax          : void Gpt_StopTimer( Gpt_ChannelType Channel )       
 * \Description     : Stops a timer channel.                                    
@@ -182,49 +224,126 @@ void Gpt_StopTimer( Gpt_ChannelType Channel )
 
 }
 
+
+
 void TIMER0A_Handler(void)
 {
+	static GptNotification gptNotificationFn_TIMER0A;
+	if (locGptNotification[GPT_16_32_BIT_TIMER0] != NULL)
+	{
+		gptNotificationFn_TIMER0A = locGptNotification[GPT_16_32_BIT_TIMER0];
+		gptNotificationFn_TIMER0A();
+	}
 }
 
 void TIMER1A_Handler(void)
 {
+	static GptNotification gptNotificationFn_TIMER1A;
+	if (locGptNotification[GPT_16_32_BIT_TIMER1] != NULL)
+	{
+		gptNotificationFn_TIMER1A = locGptNotification[GPT_16_32_BIT_TIMER1];
+		gptNotificationFn_TIMER1A();
+	}
 }
 
 void TIMER2A_Handler(void)
 {
+	static GptNotification gptNotificationFn_TIMER2A;
+	if (locGptNotification[GPT_16_32_BIT_TIMER2] != NULL)
+	{
+		gptNotificationFn_TIMER2A = locGptNotification[GPT_16_32_BIT_TIMER2];
+		gptNotificationFn_TIMER2A();
+	}
 }
 
 void TIMER3A_Handler(void)
 {
+	static GptNotification gptNotificationFn_TIMER3A;
+	if (locGptNotification[GPT_16_32_BIT_TIMER3] != NULL)
+	{
+		gptNotificationFn_TIMER3A = locGptNotification[GPT_16_32_BIT_TIMER3];
+		gptNotificationFn_TIMER3A();
+	}
 }
 
 void TIMER4A_Handler(void)
 {
+	static GptNotification gptNotificationFn_TIMER4A;
+	if (locGptNotification[GPT_16_32_BIT_TIMER4] != NULL)
+	{
+		gptNotificationFn_TIMER4A = locGptNotification[GPT_16_32_BIT_TIMER4];
+		gptNotificationFn_TIMER4A();
+	} 
 }
 
 void TIMER5A_Handler(void)
 {
+	static GptNotification gptNotificationFn_TIMER5A;
+	if (locGptNotification[GPT_16_32_BIT_TIMER5] != NULL)
+	{
+		gptNotificationFn_TIMER5A = locGptNotification[GPT_16_32_BIT_TIMER5];
+		gptNotificationFn_TIMER5A();
+	}
 }
 
 void WTIMER0A_Handler(void)
 {
+	static GptNotification gptNotificationFn_WTIMER0A;
+	if (locGptNotification[GPT_32_64_BIT_WIDE_TIMER0] != NULL)
+	{
+		gptNotificationFn_WTIMER0A = locGptNotification[GPT_32_64_BIT_WIDE_TIMER0];
+		gptNotificationFn_WTIMER0A();
+	}
 }
 
 void WTIMER1A_Handler(void)
 {
+	static GptNotification gptNotificationFn_WTIMER1A;
+	if (locGptNotification[GPT_32_64_BIT_WIDE_TIMER1] != NULL)
+	{
+		gptNotificationFn_WTIMER1A = locGptNotification[GPT_32_64_BIT_WIDE_TIMER1];
+		gptNotificationFn_WTIMER1A();
+	}
 }
 
 void WTIMER2A_Handler(void)
 {
+	static GptNotification gptNotificationFn_WTIMER2A;
+	if (locGptNotification[GPT_32_64_BIT_WIDE_TIMER2] != NULL)
+	{
+		gptNotificationFn_WTIMER2A = locGptNotification[GPT_32_64_BIT_WIDE_TIMER2];
+		gptNotificationFn_WTIMER2A();
+	}
 }
+
 void WTIMER3A_Handler(void)
 {
+	static GptNotification gptNotificationFn_WTIMER3A;
+	if (locGptNotification[GPT_32_64_BIT_WIDE_TIMER3] != NULL)
+	{
+		gptNotificationFn_WTIMER3A = locGptNotification[GPT_32_64_BIT_WIDE_TIMER3];
+		gptNotificationFn_WTIMER3A();
+	}
 }
+
 void WTIMER4A_Handler(void)
 {
+	static GptNotification gptNotificationFn_WTIMER4A;
+	if (locGptNotification[GPT_32_64_BIT_WIDE_TIMER4] != NULL)
+	{
+		gptNotificationFn_WTIMER4A = locGptNotification[GPT_32_64_BIT_WIDE_TIMER4];
+		gptNotificationFn_WTIMER4A();
+	}
 }
+
 void WTIMER5A_Handler(void)
 {
+	static GptNotification gptNotificationFn_WTIMER5A;
+	if (locGptNotification[GPT_32_64_BIT_WIDE_TIMER5] != NULL)
+	{
+		gptNotificationFn_WTIMER5A = locGptNotification[GPT_32_64_BIT_WIDE_TIMER5];
+		gptNotificationFn_WTIMER5A();
+	}
 }
 
 /**********************************************************************************************************************
