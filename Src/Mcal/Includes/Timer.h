@@ -145,6 +145,21 @@ void Gpt_StopTimer( Gpt_ChannelType Channel );
 *                                    E_NOT_OK                                  
 *******************************************************************************/
 void Gpt_Notification_Channel ( void);
+
+
+void TIMER0A_Handler(void);
+void TIMER1A_Handler(void);
+void TIMER2A_Handler(void);
+void TIMER3A_Handler(void);
+void TIMER4A_Handler(void);
+void TIMER5A_Handler(void);
+void WTIMER0A_Handler(void);
+void WTIMER1A_Handler(void);
+void WTIMER2A_Handler(void);
+void WTIMER3A_Handler(void);
+void WTIMER4A_Handler(void);
+void WTIMER5A_Handler(void);
+
  
 #endif  /* TIMER_H */
 
