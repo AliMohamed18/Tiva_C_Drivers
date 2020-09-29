@@ -16,6 +16,7 @@
  *********************************************************************************************************************/
 #include "Std_Types.h"
 #include "Mcu_Hw.h"
+#include "IntCtrl.h"
 
 
 
@@ -39,6 +40,7 @@
  *  GLOBAL FUNCTION MACROS
  *********************************************************************************************************************/
 
+extern const Interrupt_CfgType Interrupt_Groups[NUM_OF_ACTIVATED_GROUPS];
 
 
 #endif  /* INTCTRL_CFG_H */
