@@ -94,13 +94,6 @@ else if (Mode_Temp==GPT_CH_MODE_ONESHOT)		(*((volatile uint32*)(Gpt_BaseAddress[
 	
 Gpt_DisableNotification(Channel_Temp);	
 }
-
-
-
-
-
-
-
 }
 	/******************************************************************************
 * \Syntax          : void Gpt_DisableNotification( Gpt_ChannelType Channel )        
