@@ -131,19 +131,58 @@ void Gpt_EnableNotification( Gpt_ChannelType Channel )
 {
 	(*((volatile uint32*)(Gpt_BaseAddress[Channel] + GPTMIMR_OFFSET  ))) |= ((uint32)(1<<0));
 }
+
 /******************************************************************************
-* \Syntax          : Std_ReturnType FunctionName(AnyType parameterName)        
-* \Description     : Describe this service                                    
+* \Syntax          : Gpt_GetTimeElapsed( Gpt_ChannelType Channel )        
+* \Description     : Returns the time already elapsed.                                    
 *                                                                             
 * \Sync\Async      : Synchronous                                               
-* \Reentrancy      : Non Reentrant                                             
-* \Parameters (in) : parameterName   Parameter Describtion                     
-* \Parameters (out): None                                                      
-* \Return value:   : Std_ReturnType  E_OK
-*                                    E_NOT_OK                                  
+* \Reentrancy      : Reentrant                                             
+* \Parameters (in) : Channel   Numeric identifier of the GPT channel.                    
+* \Parameters (out): Gpt_ValueType                                                      
+* \Return value:   : Gpt_ValueType  uint32                                  
 *******************************************************************************/
-Std_ReturnType Gpt_GetPredefTimerValue( Gpt_PredefTimerType PredefTimer, uint32* TimeValuePtr)
+Gpt_ValueType Gpt_GetTimeElapsed( Gpt_ChannelType Channel )
 {
+	Gpt_ValueType value;
+
+	uint32 divisor;
+	
+	Gpt_ChannelTickFrequency 	locChannelTickFreq=0;
+	GptChannelTickValueMax  	locChannelMaxValue=0;
+	
+	for(uint32 Counter=0;Counter<MAX_NUMBER_OF_GPIO_GPT;Counter++)
+	{
+		if (globalGptConfig[Counter].channel == Channel)
+		{
+			locChannelTickFreq = globalGptConfig[Counter].channelTickFreq;
+			locChannelMaxValue = globalGptConfig[Counter].channelTickMaxValue;
+			
+			break;
+		}
+	}
+	
+	divisor = GlobalSystemClock / locChannelTickFreq;
+	
+	for(uint8 Counter=2;;Counter*=2)
+	{
+		if(divisor/Counter == 1)
+		{
+			if(divisor%Counter <= (Counter/2))
+			{
+				divisor = Counter;
+			}
+			else
+			{
+				divisor = Counter*2;
+			}
+			break;
+		}
+	}
+	 
+	value = ((*((volatile uint32*)(Gpt_BaseAddress[Channel] + GPTMTAV_OFFSET  ))) / divisor) & locChannelMaxValue;
+	
+	return value;
 }
 
 /******************************************************************************
@@ -158,8 +197,47 @@ Std_ReturnType Gpt_GetPredefTimerValue( Gpt_PredefTimerType PredefTimer, uint32*
 *******************************************************************************/
 Gpt_ValueType Gpt_GetTimeRemaining( Gpt_ChannelType Channel )
 {
+	Gpt_ValueType value, currentValue, remainingValue;
+	uint32 divisor;
+	
+	Gpt_ChannelTickFrequency 	locChannelTickFreq=0;
+	GptChannelTickValueMax  	locChannelMaxValue=0;
+	
+	for(uint32 Counter=0;Counter<MAX_NUMBER_OF_GPIO_GPT;Counter++)
+	{
+		if (globalGptConfig[Counter].channel == Channel)
+		{
+			locChannelTickFreq = globalGptConfig[Counter].channelTickFreq;
+			locChannelMaxValue = globalGptConfig[Counter].channelTickMaxValue;
+			
+			break;
+		}
+	}
+	
+	divisor = GlobalSystemClock / locChannelTickFreq;
+	
+	for(uint8 Counter=2;;Counter*=2)
+	{
+		if(divisor/Counter == 1)
+		{
+			if(divisor%Counter <= (Counter/2))
+			{
+				divisor = Counter;
+			}
+			else
+			{
+				divisor = Counter*2;
+			}
+			break;
+		}
+	}
+	currentValue = ((*((volatile uint32*)(Gpt_BaseAddress[Channel] + GPTMTAV_OFFSET  ))) / divisor) & locChannelMaxValue;
+	value =((*((volatile uint32*)(Gpt_BaseAddress[Channel] + GPTMTAILR_OFFSET  ))) / divisor) & locChannelMaxValue;
+	
+	remainingValue = value - currentValue;
+	
+	return remainingValue;
 }
-
 
 /******************************************************************************
 * \Syntax          : void Gpt_StartTimer( Gpt_ChannelType Channel, Gpt_ValueType Value );        
@@ -190,6 +268,7 @@ void Gpt_StartTimer( Gpt_ChannelType Channel, Gpt_ValueType Value )
 	
 	for(uint8 Counter=2 ;; Counter*=2)
 	{
+
 		if(divisor/Counter == 1)
 		{
 			if(divisor%Counter <= (Counter/2))
