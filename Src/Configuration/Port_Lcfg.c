@@ -29,8 +29,9 @@
 const Port_ConfigType Port_Config[NUMBER_OF_ACTIVATED_CHANNELS]=
 {
 	/* pin       Dir         Mode             Attach      OutputCurr  */        
-	{  PF2     ,Output   	,DIO    					,DEFAULT   	,CURRENT_NA	}
-
+	{  PF1     ,Output   	,DIO    					,DEFAULT   	,CURRENT_NA	},
+	{  PF2     ,Output   	,DIO    					,DEFAULT   	,CURRENT_NA	},
+	{  PF3     ,Output   	,DIO    					,DEFAULT   	,CURRENT_NA	},	
 };
 
 /**********************************************************************************************************************
