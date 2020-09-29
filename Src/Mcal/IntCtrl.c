@@ -18,7 +18,7 @@
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/	
- extern const Interrupt_CfgType  Interrupt_Groups[];
+extern const Interrupt_CfgType  Interrupt_Groups[];
 
 /**********************************************************************************************************************
  *  LOCAL DATA 
@@ -98,7 +98,7 @@ else if(Interrupt_Number_Temp >= 128 &&	Interrupt_Number_Temp <= 138)  SET(EN4,(
 
 			priRegOffset = (Interrupt_Number_Temp/4)*32;
 			priBitOffset = 5 + (8 * (Interrupt_Number_Temp%4));
-			(*((volatile uint32*)(NVIC_PRIX_BASE_ADDRESS + priRegOffset  ))) |= ((uint8)(Grouping_Field << priBitOffset));
+			(*((volatile uint32*)(NVIC_PRIX_BASE_ADDRESS + priRegOffset  ))) |= ((uint32)(Grouping_Field << priBitOffset));
 }
 	
 }
