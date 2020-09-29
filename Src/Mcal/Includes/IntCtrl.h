@@ -25,10 +25,10 @@
  *********************************************************************************************************************/
 #define APINT_VECTKEY 0x05FA
 
-#define XXX 					0x4
-#define XXY 					0x5
-#define XYY 					0x6
-#define YYY				  	0x7
+#define GROUPING_SYSTEM_XXX 					0x4
+#define GROUPING_SYSTEM_XXY 					0x5
+#define GROUPING_SYSTEM_XYY 					0x6
+#define GROUPING_SYSTEM_YYY				  	0x7
 
 
 /**********************************************************************************************************************
