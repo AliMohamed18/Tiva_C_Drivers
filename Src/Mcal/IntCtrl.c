@@ -68,7 +68,9 @@ for(Counter=0 ;Counter < NUM_OF_ACTIVATED_GROUPS;Counter++){
 Interrupt_Number_Temp = Interrupt_Groups[Counter].Interrupt_Number;	
 Group_Temp = Interrupt_Groups[Counter].Group_Priority;
 SubGroup_Temp =	Interrupt_Groups[Counter].SubGroup_Priority;
-
+	
+// NVIC EN REG 
+	
 enRegOffset = (Interrupt_Number_Temp/32)*4;
 enBitOffset = Interrupt_Number_Temp%32;
 	
@@ -91,7 +93,7 @@ enBitOffset = Interrupt_Number_Temp%32;
 	Grouping_Field= SubGroup_Temp ;
 
 #endif
-
+// NVIC PRI REG 
 priRegOffset = (Interrupt_Number_Temp/4)*4;
 priBitOffset = 5 + (8 * (Interrupt_Number_Temp%4));
 (*((volatile uint32*)(NVIC_PRIX_BASE_ADDRESS + priRegOffset  ))) |= ((uint32)(Grouping_Field << priBitOffset));
