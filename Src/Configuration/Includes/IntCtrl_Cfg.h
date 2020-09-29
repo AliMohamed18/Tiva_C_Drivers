@@ -25,15 +25,15 @@
  *********************************************************************************************************************/
 /*
 *	please choose form the followings
-*	GROUPING_SYSTEM_XXX : [0-7] Groups , [ 0 ]subgroups ------> Choose ----> 1
-*	GROUPING_SYSTEM_XXY : [0-3] Groups , [0-1]subgroups	------> Choose ----> 2
-*	GROUPING_SYSTEM_XYY : [0-1] Groups , [0-3]subgroups	------> Choose ----> 3
-*	GROUPING_SYSTEM_YYY : [ 0 ] Groups , [0-7]subgroups	------> Choose ----> 4
+*	GROUPING_SYSTEM_XXX : [0-7] Groups , [ 0 ]subgroups 
+*	GROUPING_SYSTEM_XXY : [0-3] Groups , [0-1]subgroups	
+*	GROUPING_SYSTEM_XYY : [0-1] Groups , [0-3]subgroups	
+*	GROUPING_SYSTEM_YYY : [ 0 ] Groups , [0-7]subgroups	
 */
 
-#define GROUPING_SYSTEM   3
+#define GROUPING_SYSTEM   GROUPING_SYSTEM_XYY
 
-#define NUM_OF_ACTIVATED_GROUPS 6
+#define NUM_OF_ACTIVATED_GROUPS 2
 
 
 /**********************************************************************************************************************
