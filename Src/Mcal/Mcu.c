@@ -19,6 +19,7 @@
 extern const  uint8 MCU_ACTIVATED_GATES[];
 extern const	Mcu_ConfigType McuConfig[];
 
+extern volatile uint32 GlobalSystemClock;
 
 /**********************************************************************************************************************
  *  LOCAL DATA 
@@ -67,6 +68,8 @@ void Mcu_Init ( const Mcu_ConfigType* ConfigPtr ){
 Std_ReturnType Mcu_InitClock( Mcu_ClockType ClockSetting ){
 	uint8 Counter =0 , Gate_Temp=0 ;	
 Std_ReturnType State= E_NOT_OK;
+	
+	
 
 /****************************************Enable Gates****************************************/
 for(Counter=0;Counter<NUMBER_OF_ACTIVATED_GATES;Counter++){
@@ -133,17 +136,16 @@ for(Counter=0;Counter<NUMBER_OF_ACTIVATED_GATES;Counter++){
 }
 /********************************************************************************************/
 	
-	
-	
-	
-	
 if(Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_MOSC){
 	RCC.B.MOSCDIS=0; //EnableThe main oscillator.
-	RCC.B.OSCSRC=0x0;
+	RCC.B.OSCSRC=Mcu_Config[ClockSetting].CLOCK_SOURCE;
 }
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC) 				RCC.B.OSCSRC=0x1;
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_PIOSC_DIV_4) 	RCC.B.OSCSRC=0x2;
-else if (Mcu_Config[ClockSetting].CLOCK_SOURCE==MCU_CLOCK_SOURCE_LFIOSC) 				RCC.B.OSCSRC=0x3;
+else RCC.B.OSCSRC=Mcu_Config[ClockSetting].CLOCK_SOURCE;
+
+
+
+
+
 
 if(Mcu_Config[ClockSetting].PLL_STATE==PLL_POWERED_AND_LOCKED)
 {
@@ -236,9 +238,11 @@ RESC.R = 0;
 * \Return value:   : none
 *******************************************************************************/
 void Mcu_PerformReset(void){
+	
 RESC.R = 0;	
 APINT.B.VECTKEY=APINT_VECTKEY;
 APINT.B.SYSRESREQ=1;
+	
 }
 
 /******************************************************************************
@@ -273,16 +277,15 @@ return	PLL_STATE;
 *******************************************************************************/
 Std_ReturnType Mcu_DistributePllClock(void)
 {
-	Std_ReturnType State = 0 ;
+	Std_ReturnType State = E_NOT_OK ;
 	if(RCC.B.PWRDN == 0)
 	{
-			if(Mcu_GetPllStatus() == PLL_POWERED_AND_LOCKED)
-			{
+			
+				while(Mcu_GetPllStatus() == PLL_UNPOWERED_OR_NOT_LOCKED_YET){}
 				RCC.B.BYPASS = 1;
 				State = E_OK;
-			}
+			
 	}
-	else State = E_NOT_OK;
 	return State;
 }
 
