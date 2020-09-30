@@ -33,7 +33,8 @@
 #define POWER_ON_RESET						5
 #define EXTERNAL_RESET          	6
 
-
+#define PLL_UNPOWERED_OR_NOT_LOCKED_YET 0
+#define PLL_POWERED_AND_LOCKED 1
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION MACROS
