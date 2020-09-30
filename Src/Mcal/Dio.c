@@ -159,7 +159,14 @@ Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId){
 
 }
 
+void Dio_WriteChannelGroup( const Dio_ChannelGroupType* ChannelGroupIdPtr, Dio_PortLevelType Level ){
+	
 
+
+
+
+
+}
 /**********************************************************************************************************************
  *  END OF FILE: Dio.c
  *********************************************************************************************************************/
