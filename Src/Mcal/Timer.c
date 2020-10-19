@@ -26,7 +26,7 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
-extern volatile uint32 GlobalSystemClock;
+//extern volatile uint32 GlobalSystemClock;
 
 static const Gpt_ConfigType* globalGptConfig;
 
@@ -135,7 +135,7 @@ void Gpt_EnableNotification( Gpt_ChannelType Channel )
 * \Parameters (out): Gpt_ValueType                                                      
 * \Return value:   : Gpt_ValueType  uint32                                  
 *******************************************************************************/
-Gpt_ValueType Gpt_GetTimeElapsed( Gpt_ChannelType Channel )
+/*Gpt_ValueType Gpt_GetTimeElapsed( Gpt_ChannelType Channel )
 {
 	Gpt_ValueType value;
 
@@ -188,7 +188,7 @@ Gpt_ValueType Gpt_GetTimeElapsed( Gpt_ChannelType Channel )
 * \Parameters (out): None                                                      
 * \Return value:   : Gpt_ValueType  uint32                                 
 *******************************************************************************/
-Gpt_ValueType Gpt_GetTimeRemaining( Gpt_ChannelType Channel )
+/*Gpt_ValueType Gpt_GetTimeRemaining( Gpt_ChannelType Channel )
 {
 	Gpt_ValueType value, currentValue, remainingValue;
 	uint32 divisor;
@@ -243,7 +243,7 @@ Gpt_ValueType Gpt_GetTimeRemaining( Gpt_ChannelType Channel )
 * \Parameters (out): None                                                      
 * \Return value:   : None                                 
 *******************************************************************************/
-void Gpt_StartTimer( Gpt_ChannelType Channel, Gpt_ValueType Value )
+/*void Gpt_StartTimer( Gpt_ChannelType Channel, Gpt_ValueType Value )
 {
 	uint32 divisor;
 	Gpt_ChannelTickFrequency 	locChannelTickFreq=0;
