@@ -51,7 +51,7 @@ static const Mcu_ConfigType* Mcu_Config  ;
 * \Return value:   : None
 *******************************************************************************/
 
-void Mcu_Init ( const Mcu_ConfigType* ConfigPtr ){
+void Mcu_Init ( void ){
 
 uint32 	locGateRegOffset ,locGateBitOffset;
 	
@@ -65,7 +65,6 @@ uint32 	locGateRegOffset ,locGateBitOffset;
 	    }
 }
 	
-
 
 
 /******************************************************************************
