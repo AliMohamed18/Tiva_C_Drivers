@@ -64,7 +64,7 @@
 * \Return value:   : None
 *******************************************************************************/
 
-void Mcu_Init ( const Mcu_ConfigType* ConfigPtr );
+void Mcu_Init ( void );
 
 /******************************************************************************
 * \Syntax          : Std_ReturnType Mcu_InitClock( Mcu_ClockSourceType ClockSetting );        
