@@ -34,7 +34,7 @@ typedef enum{
 }Mcu_ClockType;
 
 
-extern  const  Mcu_ConfigType McuConfig[NUMBER_OF_ACTIVATED_CLOCK_MODE];
+//extern  const  Mcu_ConfigType McuConfig[NUMBER_OF_ACTIVATED_CLOCK_MODE];
 extern  const  uint8 MCU_ACTIVATED_GATES[NUMBER_OF_ACTIVATED_GATES];
 
 
