@@ -17,7 +17,7 @@
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/	
 extern const  uint8 MCU_ACTIVATED_GATES[];
-extern const	Mcu_ConfigType McuConfig[];
+//extern const	Mcu_ConfigType McuConfig[];
 
 extern volatile uint32 GlobalSystemClock;
 
