@@ -95,7 +95,7 @@ MCU_UART_7_ENABLE_CLOCK ,
 typedef uint8 Mcu_RawResetType ;
 typedef enum{ 
 	
-	PLL_NOT_USED=0
+	PLL_NOT_USED=0,
 	PLL_USED
 
 }Mcu_PllStatusType ;
