@@ -53,16 +53,71 @@ static const Mcu_ConfigType* Mcu_Config  ;
 
 void Mcu_Init ( void ){
 
-uint32 	locGateRegOffset ,locGateBitOffset;
-	
+	uint8 Counter =0 , Gate_Temp=0 ;	
 
-	
- for(uint8 Counter=0;Counter<NUMBER_OF_ACTIVATED_GATES;Counter++)
-	    {
-	    	locGateRegOffset = (MCU_ACTIVATED_GATES[Counter] / 10) * 4 ;
-	    	locGateBitOffset = MCU_ACTIVATED_GATES[Counter] % 10 ;
-	    (*((volatile uint32*)(0x400FE600 + locGateRegOffset  )))  |= (1<<locGateBitOffset);	
-	    }
+/****************************************Enable Gates****************************************/
+for(Counter=0;Counter<NUMBER_OF_ACTIVATED_GATES;Counter++){
+	Gate_Temp= MCU_ACTIVATED_GATES[Counter];
+	if		 (Gate_Temp==MCU_GPIOA_ENABLE_CLOCK)RCGCGPIO.B.R0=1;
+	else if(Gate_Temp==MCU_GPIOB_ENABLE_CLOCK)RCGCGPIO.B.R1=1;
+	else if(Gate_Temp==MCU_GPIOC_ENABLE_CLOCK)RCGCGPIO.B.R2=1;
+	else if(Gate_Temp==MCU_GPIOD_ENABLE_CLOCK)RCGCGPIO.B.R3=1;
+	else if(Gate_Temp==MCU_GPIOE_ENABLE_CLOCK)RCGCGPIO.B.R4=1;
+	else if(Gate_Temp==MCU_GPIOF_ENABLE_CLOCK)RCGCGPIO.B.R5=1;
+
+	else if(Gate_Temp==MCU_WATCHDOG_0_ENABLE_CLOCK)RCGCWD.B.R0=1;
+	else if(Gate_Temp==MCU_WATCHDOG_1_ENABLE_CLOCK)RCGCWD.B.R1=1;
+
+	else if(Gate_Temp==MCU_16_32_BIT_GP_TIMER_0_ENABLE_CLOCK)RCGCTIMER.B.R0=1;
+	else if(Gate_Temp==MCU_16_32_BIT_GP_TIMER_1_ENABLE_CLOCK)RCGCTIMER.B.R1=1;
+	else if(Gate_Temp==MCU_16_32_BIT_GP_TIMER_2_ENABLE_CLOCK)RCGCTIMER.B.R2=1;
+	else if(Gate_Temp==MCU_16_32_BIT_GP_TIMER_3_ENABLE_CLOCK)RCGCTIMER.B.R3=1;
+	else if(Gate_Temp==MCU_16_32_BIT_GP_TIMER_4_ENABLE_CLOCK)RCGCTIMER.B.R4=1;
+	else if(Gate_Temp==MCU_16_32_BIT_GP_TIMER_5_ENABLE_CLOCK)RCGCTIMER.B.R5=1;
+
+	else if(Gate_Temp==MCU_DMA_ENABLE_CLOCK)RCGCDMA.B.R0=1;
+
+	else if(Gate_Temp==MCU_HIBERNATION_MODE_ENABLE_CLOCK)RCGCHIB.B.R0=1;
+
+	else if(Gate_Temp==MCU_UART_0_ENABLE_CLOCK)RCGCUART.B.R0=1;
+	else if(Gate_Temp==MCU_UART_1_ENABLE_CLOCK)RCGCUART.B.R1=1;
+	else if(Gate_Temp==MCU_UART_2_ENABLE_CLOCK)RCGCUART.B.R2=1;
+	else if(Gate_Temp==MCU_UART_3_ENABLE_CLOCK)RCGCUART.B.R3=1;
+	else if(Gate_Temp==MCU_UART_4_ENABLE_CLOCK)RCGCUART.B.R4=1;
+	else if(Gate_Temp==MCU_UART_5_ENABLE_CLOCK)RCGCUART.B.R5=1;
+	else if(Gate_Temp==MCU_UART_6_ENABLE_CLOCK)RCGCUART.B.R6=1;
+	else if(Gate_Temp==MCU_UART_7_ENABLE_CLOCK)RCGCUART.B.R7=1;
+
+
+	else if(Gate_Temp==MCU_SSI_0_ENABLE_CLOCK)RCGCSSI.B.R0=1;
+	else if(Gate_Temp==MCU_SSI_1_ENABLE_CLOCK)RCGCSSI.B.R1=1;
+	else if(Gate_Temp==MCU_SSI_2_ENABLE_CLOCK)RCGCSSI.B.R2=1;
+	else if(Gate_Temp==MCU_SSI_3_ENABLE_CLOCK)RCGCSSI.B.R3=1;
+
+	else if(Gate_Temp==MCU_I2C_0_ENABLE_CLOCK)RCGCI2C.B.R0=1;
+	else if(Gate_Temp==MCU_I2C_1_ENABLE_CLOCK)RCGCI2C.B.R1=1;
+	else if(Gate_Temp==MCU_I2C_2_ENABLE_CLOCK)RCGCI2C.B.R2=1;
+	else if(Gate_Temp==MCU_I2C_3_ENABLE_CLOCK)RCGCI2C.B.R3=1;
+
+	else if(Gate_Temp==MCU_USB_ENABLE_CLOCK)RCGCUSB.B.R0=1;
+
+	else if(Gate_Temp==MCU_CAN_0_ENABLE_CLOCK)RCGCCAN.B.R0=1;
+	else if(Gate_Temp==MCU_CAN_1_ENABLE_CLOCK)RCGCCAN.B.R1=1;
+
+	else if(Gate_Temp==MCU_ADC_0_ENABLE_CLOCK)RCGCADC.B.R0=1;
+	else if(Gate_Temp==MCU_ADC_1_ENABLE_CLOCK)RCGCADC.B.R1=1;
+
+	else if(Gate_Temp==MCU_ANALOG_COMPARATOR_ENABLE_CLOCK)RCGCACMP.B.R0=1;
+
+	else if(Gate_Temp==MCU_PWM_0_ENABLE_CLOCK)RCGCPWM.B.R0=1;
+	else if(Gate_Temp==MCU_PWM_1_ENABLE_CLOCK)RCGCPWM.B.R1=1;	
+
+	else if(Gate_Temp==MCU_QEI_0_ENABLE_CLOCK)RCGCQEI.B.R0=1;
+	else if(Gate_Temp==MCU_QEI_1_ENABLE_CLOCK)RCGCQEI.B.R1=1;	
+
+	else if(Gate_Temp==MCU_EEPROM_ENABLE_CLOCK)RCGCEEPROM.B.R0=1;	
+
+}
 }
 	
 
