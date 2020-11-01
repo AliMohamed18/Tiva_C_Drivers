@@ -31,14 +31,14 @@
  MCU_GPIOF_ENABLE_CLOCK 
 	 
  };
-
+/*
  const  Mcu_ConfigType McuConfig[NUMBER_OF_ACTIVATED_CLOCK_MODE]=
 {
 	{MCU_CLOCK_SOURCE_MOSC						,PLL_NOT_USED						,8000000	},
 	{MCU_CLOCK_SOURCE_MOSC						,PLL_NOT_USED						,16000000	},
 	{MCU_CLOCK_SOURCE_MOSC						,PLL_USED								,80000000	}
 };
-
+*/
  
 /**********************************************************************************************************************
  *  END OF FILE: Mcu_Lcfg.c
