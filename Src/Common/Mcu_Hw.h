@@ -625,6 +625,35 @@ typedef union{
 #define NVIC_ENX_BASE_ADDRESS					    (CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x100)
 #define NVIC_PRIX_BASE_ADDRESS					  (CORTEX_M4_PERIPHERALS_BASE_ADDRESS+0x400)
 
+#define UART0_BASE_ADDRESS 0x4000C000
+#define UART1_BASE_ADDRESS 0x4000D000
+#define UART2_BASE_ADDRESS 0x4000E000
+#define UART3_BASE_ADDRESS 0x4000F000
+#define UART4_BASE_ADDRESS 0x40010000
+#define UART5_BASE_ADDRESS 0x40011000
+#define UART6_BASE_ADDRESS 0x40012000
+#define UART7_BASE_ADDRESS 0x40013000
+
+#define  UARTDR_OFFSET                          0x000
+#define  UARTRSR_UARTECR_OFFSET                 0x004
+#define  UARTFR_OFFSET                          0x018
+#define  UARTILPR_OFFSET                        0x020
+#define  UARTIBRD_OFFSET                        0x024
+#define  UARTFBRD_OFFSET                        0x028
+#define  UARTLCRH_OFFSET                        0x02C
+#define  UARTCTL_OFFSET                         0x030
+#define  UARTIFLS_OFFSET                        0x034
+#define  UARTIM_OFFSET                          0x038
+#define  UARTRIS_OFFSET                         0x03C
+#define  UARTMIS_OFFSET                         0x040
+#define  UARTICR_OFFSET                         0x044
+#define  UARTDMACTL_OFFSET                      0x048
+#define  UART9BITADDR_OFFSET                    0x0A4
+#define  UART9BITAMASK_OFFSET                   0x0A8
+#define  UARTPP_OFFSET                          0xFC0
+#define  UARTCC_OFFSET                          0xFC8
+
+
 
 #define GPIO_PORTA_APB_BASE_ADDRESS 						0x40004000
 #define GPIO_PORTA_AHB_BASE_ADDRESS 						0x40058000
