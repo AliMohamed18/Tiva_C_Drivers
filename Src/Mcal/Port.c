@@ -94,8 +94,9 @@ if			 (Temp_Mode==DIO)	{
 }
 
 else{
+(*((volatile uint32*)(Port_BaseAddress[Port] + GPIODEN_OFFSET  ))) |= ((uint8)(1<< Pin)); // GPIO Digital Enable 	
 (*((volatile uint32*)(Port_BaseAddress[Port] + GPIOAFSEL_OFFSET  )))|= (1<< Pin);
-(*((volatile uint32*)(Port_BaseAddress[Port] + GPIOPCTL_OFFSET   )))|= ((uint8)(Temp_Mode << (4 * Pin)));
+(*((volatile uint32*)(Port_BaseAddress[Port] + GPIOPCTL_OFFSET   )))|= ((Temp_Mode << (4 * Pin)));
 	}
 
  }
