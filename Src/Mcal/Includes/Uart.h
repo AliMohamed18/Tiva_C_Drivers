@@ -14,8 +14,6 @@
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
-#include "Uart_Types.h"
-#include "Uart_Cfg.h"
 #include "Std_Types.h"
 #include "Mcu_Hw.h"
 #include "Bit_Operations.h"
@@ -34,6 +32,25 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
+typedef enum{ 
+Uart0 = 0,
+Uart1,
+Uart2,
+Uart3,
+Uart4,
+Uart5,
+Uart6,
+Uart7,
+}Uart_ChannelType;
+
+typedef uint32 BaudRateType;
+
+
+typedef struct{
+
+	Uart_ChannelType UARTPIN;
+	BaudRateType BAUDRATE;
+}Uart_ConfigType;
 
 
 /**********************************************************************************************************************
@@ -90,7 +107,7 @@ char Uart_ReceiveChar(Uart_ChannelType Channel);
 * \Return value:   : char                               
 *******************************************************************************/
 
-void UART_ReceiveString(Uart_ChannelType Channel, char *Str);
+void Uart_ReceiveString(Uart_ChannelType Channel, char *Str);
 
  /******************************************************************************
 * \Syntax          : void Uart_SendString(Uart_ChannelType Channel,const sint8 *Str)       
