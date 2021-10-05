@@ -76,26 +76,26 @@ void Port_Init(const Port_ConfigType *ConfigPtr)
 		Port = Temp_Pin / 8;
 		Pin = Temp_Pin % 8;
 
-		HwAccess(Port_BaseAddress[Port] + GPIOLOCK_OFFSET) 	|= UNLOCK_KEY;		 // GPIO Unlock
-		HwAccess(Port_BaseAddress[Port] + GPIOCR_OFFSET)	|= ((uint8)(1 << Pin)); // GPIO Digital Enable
+		HwAccess(Port_BaseAddress[Port] + GPIOLOCK_OFFSET) |= UNLOCK_KEY;		 // GPIO Unlock
+		HwAccess(Port_BaseAddress[Port] + GPIOCR_OFFSET) |= ((uint8)(1 << Pin)); // GPIO Digital Enable
 
 		if (Temp_Dir == PORT_PIN_OUT)
-			
+
 			HwAccess(Port_BaseAddress[Port] + GPIODIR_OFFSET) |= (1 << Pin);
 		else if (Temp_Dir == PORT_PIN_IN)
 			HwAccess(Port_BaseAddress[Port] + GPIODIR_OFFSET) &= (~(1 << Pin));
 
 		if (Temp_Attach == PULLUP && Temp_Dir == PORT_PIN_IN)
-			
+
 			HwAccess(Port_BaseAddress[Port] + GPIOPUR_OFFSET) |= (1 << Pin);
-		
+
 		else if (Temp_Attach == PULLDOWN && Temp_Dir == PORT_PIN_IN)
-			
-			HwAccess(Port_BaseAddress[Port] + GPIOPDR_OFFSET) 	|= (1 << Pin);
-		
+
+			HwAccess(Port_BaseAddress[Port] + GPIOPDR_OFFSET) |= (1 << Pin);
+
 		else if (Temp_Attach == OPENDRAIN && Temp_Dir == PORT_PIN_OUT)
-			
-			HwAccess(Port_BaseAddress[Port] + GPIOODR_OFFSET)	|= (1 << Pin);
+
+			HwAccess(Port_BaseAddress[Port] + GPIOODR_OFFSET) |= (1 << Pin);
 
 		if (Temp_Current == CURRENT_2M)
 			HwAccess(Port_BaseAddress[Port] + GPIODR2R_OFFSET) |= (1 << Pin);
@@ -106,15 +106,15 @@ void Port_Init(const Port_ConfigType *ConfigPtr)
 
 		if (Temp_Mode == DIO)
 		{
-			
+
 			HwAccess(Port_BaseAddress[Port] + GPIODEN_OFFSET) |= ((uint8)(1 << Pin)); // GPIO Digital Enable
-			
+
 			HwAccess(Port_BaseAddress[Port] + GPIOAFSEL_OFFSET) &= (~(1 << Pin));
 		}
 
 		else
 		{
-			
+
 			HwAccess(Port_BaseAddress[Port] + GPIODEN_OFFSET) |= ((uint8)(1 << Pin)); // GPIO Digital Enable
 			HwAccess(Port_BaseAddress[Port] + GPIOAFSEL_OFFSET) |= (1 << Pin);
 			HwAccess(Port_BaseAddress[Port] + GPIOPCTL_OFFSET) |= ((Temp_Mode << (4 * Pin)));
