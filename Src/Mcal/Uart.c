@@ -65,8 +65,8 @@ void Uart_Init(const Uart_ConfigType *ConfigPtr)
 {
 	Uart_ChannelType Temp_UartPin;
 	BaudRateType Temp_BuadRate;
-	uint32 IBRD=0, FBRD=0;
-	float BR=0;
+	uint32 IBRD = 0, FBRD = 0;
+	float BR = 0;
 	uint8 Counter;
 
 	for (Counter = 0; Counter < NUMBER_OF_ACTIVATED_UARTS; Counter++)
