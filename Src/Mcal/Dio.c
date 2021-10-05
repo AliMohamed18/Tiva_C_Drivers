@@ -25,8 +25,7 @@ static const uint32 Port_APB_BaseAddress[6] = {
 	GPIO_PORTC_APB_BASE_ADDRESS,
 	GPIO_PORTD_APB_BASE_ADDRESS,
 	GPIO_PORTE_APB_BASE_ADDRESS,
-	GPIO_PORTF_APB_BASE_ADDRESS
-};
+	GPIO_PORTF_APB_BASE_ADDRESS};
 
 /*static const uint32 Port_AHB_BaseAddress[6] = {
 GPIO_PORTA_AHB_BASE_ADDRESS,
@@ -58,7 +57,6 @@ GPIO_PORTF_AHB_BASE_ADDRESS
  *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
 
-
 /******************************************************************************
 * \Service name		 : Dio_ReadChannel
 * \Syntax          : Dio_LevelType Dio_ReadChannel ( Dio_ChannelType ChannelId )        
@@ -71,17 +69,18 @@ GPIO_PORTF_AHB_BASE_ADDRESS
 																	 -> STD_LOW  The physical level of the corresponding Pin is STD_LOW                                  
 *******************************************************************************/
 
-Dio_LevelType Dio_ReadChannel ( Dio_ChannelType ChannelId ){
+Dio_LevelType Dio_ReadChannel(Dio_ChannelType ChannelId)
+{
 
 	Dio_LevelType level;
-	uint8 portPos,channelPos;
-	
+	uint8 portPos, channelPos;
+
 	portPos = ChannelId / 8;
 	channelPos = ChannelId % 8;
-	
-	uint32 GPIO_DATA =Port_APB_BaseAddress[portPos] + GPIODATA_OFFSET + (4 * (1<<channelPos));
-		
-	level	=	((HwAccess(GPIO_DATA) >> channelPos) &1);
+
+	uint32 GPIO_DATA = Port_APB_BaseAddress[portPos] + GPIODATA_OFFSET + (4 * (1 << channelPos));
+
+	level = ((HwAccess(GPIO_DATA) >> channelPos) & 1);
 
 	return level;
 }
@@ -98,18 +97,17 @@ Dio_LevelType Dio_ReadChannel ( Dio_ChannelType ChannelId ){
 * \Return value:   : None                                
 *******************************************************************************/
 
-void Dio_WriteChannel ( Dio_ChannelType ChannelId, Dio_LevelType Level ){
+void Dio_WriteChannel(Dio_ChannelType ChannelId, Dio_LevelType Level)
+{
 
-	uint8 portPos,channelPos;
-	
+	uint8 portPos, channelPos;
+
 	portPos = ChannelId / 8;
 	channelPos = ChannelId % 8;
-	
-	uint32 GPIO_DATA =Port_APB_BaseAddress[portPos] + GPIODATA_OFFSET + (4 * (1<<channelPos));
-	
+
+	uint32 GPIO_DATA = Port_APB_BaseAddress[portPos] + GPIODATA_OFFSET + (4 * (1 << channelPos));
+
 	HwAccess(GPIO_DATA) = ((uint32)(Level << channelPos));
-
-
 }
 
 /******************************************************************************
@@ -123,12 +121,13 @@ void Dio_WriteChannel ( Dio_ChannelType ChannelId, Dio_LevelType Level ){
 * \Return value:   : Dio_PortLevelType 	->	Level of all channels of that port                                
 *******************************************************************************/
 
-Dio_PortLevelType Dio_ReadPort ( Dio_PortType PortId ){
-	Dio_PortLevelType portLevel ;
-	uint32 GPIO_DATA =Port_APB_BaseAddress[PortId]+GPIODATA_OFFSET+0X3FC;
-	
-	portLevel = ((uint8)	HwAccess(GPIO_DATA));
-	
+Dio_PortLevelType Dio_ReadPort(Dio_PortType PortId)
+{
+	Dio_PortLevelType portLevel;
+	uint32 GPIO_DATA = Port_APB_BaseAddress[PortId] + GPIODATA_OFFSET + 0X3FC;
+
+	portLevel = ((uint8)HwAccess(GPIO_DATA));
+
 	return portLevel;
 }
 
@@ -144,12 +143,12 @@ Dio_PortLevelType Dio_ReadPort ( Dio_PortType PortId ){
 * \Return value:   : None                                
 *******************************************************************************/
 
-void Dio_WritePort( Dio_PortType PortId, Dio_PortLevelType Level ){
+void Dio_WritePort(Dio_PortType PortId, Dio_PortLevelType Level)
+{
 
-	uint32 GPIO_DATA =Port_APB_BaseAddress[PortId]+GPIODATA_OFFSET+0X3FC;
-	
-	HwAccess(GPIO_DATA)=Level ;
+	uint32 GPIO_DATA = Port_APB_BaseAddress[PortId] + GPIODATA_OFFSET + 0X3FC;
 
+	HwAccess(GPIO_DATA) = Level;
 }
 
 /******************************************************************************
@@ -165,14 +164,15 @@ void Dio_WritePort( Dio_PortType PortId, Dio_PortLevelType Level ){
 																				STD_LOW: The physical level of the corresponding Pin is STD_LOW.                                
 *******************************************************************************/
 
-Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId){
+Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId)
+{
 
+	if (Dio_ReadChannel(ChannelId) == STD_low)
+		Dio_WriteChannel(ChannelId, STD_high);
+	else
+		Dio_WriteChannel(ChannelId, STD_low);
 
-	if (Dio_ReadChannel(ChannelId) == STD_low) Dio_WriteChannel(ChannelId,STD_high);
-	else									   Dio_WriteChannel(ChannelId,STD_low);
-	
 	return Dio_ReadChannel(ChannelId);
-
 }
 
 /******************************************************************************
@@ -187,11 +187,12 @@ Dio_LevelType Dio_FlipChannel(Dio_ChannelType ChannelId){
 * \Return value:   : None                                
 *******************************************************************************/
 
-void Dio_WriteChannelGroup( const Dio_ChannelGroupType* ChannelGroupIdPtr, Dio_PortLevelType Level ){
-		
+void Dio_WriteChannelGroup(const Dio_ChannelGroupType *ChannelGroupIdPtr, Dio_PortLevelType Level)
+{
+
 	Dio_PortLevelType *PortPtr;
-	PortPtr=((uint8*)(Port_APB_BaseAddress[ChannelGroupIdPtr->port] + GPIODATA_OFFSET + 0X3FC));
-	*PortPtr = ((*PortPtr)&(~(ChannelGroupIdPtr->mask))) | (Level<<ChannelGroupIdPtr->offset);
+	PortPtr = ((uint8 *)(Port_APB_BaseAddress[ChannelGroupIdPtr->port] + GPIODATA_OFFSET + 0X3FC));
+	*PortPtr = ((*PortPtr) & (~(ChannelGroupIdPtr->mask))) | (Level << ChannelGroupIdPtr->offset);
 }
 
 /******************************************************************************
@@ -205,15 +206,15 @@ void Dio_WriteChannelGroup( const Dio_ChannelGroupType* ChannelGroupIdPtr, Dio_P
 * \Return value:   : Dio_PortLevelType	->	Level of a subset of the adjoining bits of a port                               
 *******************************************************************************/
 
-Dio_PortLevelType Dio_ReadChannelGroup( const Dio_ChannelGroupType* ChannelGroupIdPtr){
-	
-	Dio_PortLevelType *PortPtr,Level;
-	
-	PortPtr=((uint8*)(Port_APB_BaseAddress[ChannelGroupIdPtr->port] + GPIODATA_OFFSET + 0X3FC));
-	
-	Level = ((*PortPtr)&(ChannelGroupIdPtr->mask))>>ChannelGroupIdPtr->offset;
-	return Level ;
+Dio_PortLevelType Dio_ReadChannelGroup(const Dio_ChannelGroupType *ChannelGroupIdPtr)
+{
 
+	Dio_PortLevelType *PortPtr, Level;
+
+	PortPtr = ((uint8 *)(Port_APB_BaseAddress[ChannelGroupIdPtr->port] + GPIODATA_OFFSET + 0X3FC));
+
+	Level = ((*PortPtr) & (ChannelGroupIdPtr->mask)) >> ChannelGroupIdPtr->offset;
+	return Level;
 }
 /***********************************************************************************************************************
  *  END OF FILE: Dio.c
