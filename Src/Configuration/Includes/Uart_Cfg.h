@@ -17,9 +17,9 @@
 #include "Std_Types.h"
 #include "Mcu_Hw.h"
 #include "Uart.h"
+
 extern uint32 SystemCoreClock;
 
-#define SysClk SystemCoreClock
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
