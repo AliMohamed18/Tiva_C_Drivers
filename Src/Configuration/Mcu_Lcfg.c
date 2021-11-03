@@ -28,19 +28,11 @@
  
  const  uint8 MCU_ACTIVATED_GATES[NUMBER_OF_ACTIVATED_GATES]={
 	 
-	MCU_GPIOF_ENABLE_CLOCK,
-	MCU_GPIOA_ENABLE_CLOCK,
-	MCU_UART_0_ENABLE_CLOCK
-	 
+	 MCU_GPIOF_ENABLE_CLOCK,
+	 MCU_PWM_1_ENABLE_CLOCK
+
  };
-/*
- const  Mcu_ConfigType McuConfig[NUMBER_OF_ACTIVATED_CLOCK_MODE]=
-{
-	{MCU_CLOCK_SOURCE_MOSC						,PLL_NOT_USED						,8000000	},
-	{MCU_CLOCK_SOURCE_MOSC						,PLL_NOT_USED						,16000000	},
-	{MCU_CLOCK_SOURCE_MOSC						,PLL_USED								,80000000	}
-};
-*/
+
  
 /**********************************************************************************************************************
  *  END OF FILE: Mcu_Lcfg.c
