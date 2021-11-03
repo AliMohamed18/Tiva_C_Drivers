@@ -29,11 +29,9 @@ const Port_ConfigType Port_Config[NUMBER_OF_ACTIVATED_CHANNELS] =
 	{
 		/* pin       			  Dir         		Mode     Attach      OutputCurr  */
 
-		{Dio_Channel_F2, PORT_PIN_OUT, DIO, DEFAULT, CURRENT_NA},
-		{Dio_Channel_B0, PORT_PIN_OUT, B0_U1Rx, DEFAULT, CURRENT_NA},
-		{Dio_Channel_B1, PORT_PIN_OUT, B1_U1Tx, DEFAULT, CURRENT_NA}
-
+		{Dio_Channel_F2, PORT_PIN_OUT, F2_M1PWM6, DEFAULT, CURRENT_NA}
 };
+
 
 const Dio_ChannelGroupType RGB = {0x0E, 1, PORTF};
 const Dio_ChannelGroupType KeypadInput;
