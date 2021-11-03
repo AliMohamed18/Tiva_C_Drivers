@@ -76,7 +76,7 @@ void Uart_Init(const Uart_ConfigType *ConfigPtr)
 
 		HwAccess(Uart_BaseAddress[Temp_UartPin] + UARTCTL_OFFSET) = 0; /* disable UART */ // HSE IS 0 So CLkDiv = 16
 
-		BR = ((float)(((float)SysClk) / (Temp_BuadRate * 16)));
+		BR = ((float)(((float)SystemCoreClock) / (Temp_BuadRate * 16)));
 		IBRD = ((uint32)BR);
 		FBRD = ((uint32)((((float)(BR - IBRD)) * 64) + 0.5));
 
