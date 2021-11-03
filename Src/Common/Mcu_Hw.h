@@ -661,7 +661,94 @@ typedef union
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
-
+#define PWM0_BASE_ADDRESS	 	0x40028000
+#define PWM1_BASE_ADDRESS 		0x40029000
+#define PWMCTL_OFFSET		 0x000
+#define PWMSYNC_OFFSET        0x004
+#define PWMENABLE_OFFSET     0x008
+#define PWMINVERT_OFFSET     0x00C
+#define PWMFAULT_OFFSET     0x010
+#define PWMINTEN_OFFSET     0x014
+#define PWMRIS_OFFSET     0x018
+#define PWMISC_OFFSET     0x01C
+#define PWMSTATUS_OFFSET     0x020
+#define PWMFAULTVAL_OFFSET  0x024
+#define PWMENUPD_OFFSET  0x028
+#define PWM0CTL_OFFSET  0x040
+#define PWM0INTEN_OFFSET  0x044
+#define PWM0RIS_OFFSET  0x048
+#define PWM0ISC_OFFSET  0x04C
+#define PWM0LOAD_OFFSET  0x050
+#define PWM0COUNT_OFFSET  0x054
+#define PWM0CMPA_OFFSET  0x058
+#define PWM0CMPB_OFFSET  0x05C
+#define PWM0GENA_OFFSET  0x060
+#define PWM0GENB_OFFSET  0x064
+#define PWM0DBCTL_OFFSET  0x068
+#define PWM0DBRIS_OFFSET  0x06C
+#define PWM0DBFAL_OFFSET  0x070
+#define PWM0FLTSRC0_OFFSET  0x074
+#define PWM0FLTSRC1_OFFSET 	 0x078
+#define PWM0MINFLTPER_OFFSET    0x07C
+#define PWM1CTL_OFFSET          0x080
+#define PWM1INTEN_OFFSET        0x084
+#define PWM1RIS_OFFSET          0x088
+#define PWM1ISC_OFFSET          0x08C
+#define PWM1LOAD_OFFSET         0x090
+#define PWM1COUNT_OFFSET        0x094
+#define PWM1CMPA_OFFSET         0x098
+#define PWM1CMPB_OFFSET         0x09C
+#define PWM1GENA_OFFSET         0x0A0
+#define PWM1GENB_OFFSET    0x0A4
+#define PWM1DBCTL_OFFSET    0x0A8
+#define PWM1DBRISE_OFFSET    0x0AC
+#define PWM1DBFALL_OFFSET    0x0B0
+#define PWM1FLTSRC0_OFFSET    0x0B4
+#define PWM1FLTSRC1_OFFSET    0x0B8
+#define PWM1MINFLTPER_OFFSET    0x0BC
+#define PWM2CTL_OFFSET   0x0C0
+#define PWM2INTEN_OFFSET   0x0C4
+#define PWM2RIS_OFFSET   0x0C8
+#define PWM2ISC_OFFSET   0x0CC
+#define PWM2LOAD_OFFSET   0x0D0
+#define PWM2COUNT_OFFSET   0x0D4
+#define PWM2CMPA_OFFSET   0x0D8
+#define PWM2CMPB_OFFSET   0x0DC
+#define PWM2GENA_OFFSET   0x0E0
+#define PWM2GENB_OFFSET   0x0E4
+#define PWM2DBCTL_OFFSET   0x0E8
+#define PWM2DBRISE_OFFSET   0x0EC
+#define PWM2DBFALL_OFFSET   0x0F0
+#define PWM2FLTSRC0_OFFSET   0x0F4
+#define PWM2FLTSRC1_OFFSET   0x0F8
+#define PWM2MINFLTPER_OFFSET  0x0FC
+#define PWM3CTL_OFFSET  0x100
+#define PWM3INTEN_OFFSET  0x104
+#define PWM3RIS_OFFSET  0x108
+#define PWM3ISC_OFFSET  0x10C
+#define PWM3LOAD_OFFSET  0x110
+#define PWM3COUNT_OFFSET  0x114
+#define PWM3CMPA_OFFSET  0x118
+#define PWM3CMPB_OFFSET  0x11C
+#define PWM3GENA_OFFSET  0x120
+#define PWM3GENB_OFFSET  0x124
+#define PWM3DBCTL_OFFSET  0x128
+#define PWM3DBRISE_OFFSET  0x12C
+#define PWM3DBFALL_OFFSET  0x130
+#define PWM3FLTSRC0_OFFSET  0x134
+#define PWM3FLTSRC1_OFFSET  0x138
+#define PWM3MINFLTPER_OFFSET  0x13C
+#define PWM0FLTSEN_OFFSET  0x800
+#define PWM0FLTSTAT0_OFFSET  0x804
+#define PWM0FLTSTAT1_OFFSET  0x808
+#define PWM1FLTSEN_OFFSET  0x880
+#define PWM1FLTSTAT0_OFFSET  0x884
+#define PWM1FLTSTAT1_OFFSET  0x888
+#define PWM2FLTSTAT0_OFFSET  0x904
+#define PWM2FLTSTAT1_OFFSET  0x908
+#define PWM3FLTSTAT0_OFFSET  0x984
+#define PWM3FLTSTAT1_OFFSET  0x988
+#define PWMPP_OFFSET  0xFC0
 #define CORTEX_M4_PERIPHERALS_BASE_ADDRESS 0xE000E000
 #define CORTEX_M4_SYSTEM_CONTROL_BASE_ADDRESS 0x400FE000
 
@@ -710,6 +797,9 @@ typedef union
 #define UART9BITAMASK_OFFSET 0x0A8
 #define UARTPP_OFFSET 0xFC0
 #define UARTCC_OFFSET 0xFC8
+
+
+
 
 #define GPIO_PORTA_APB_BASE_ADDRESS 0x40004000
 #define GPIO_PORTA_AHB_BASE_ADDRESS 0x40058000
@@ -776,6 +866,11 @@ typedef union
 #define GPTMTAPV_OFFSET 0x064
 #define GPTMTBPV_OFFSET 0x068
 #define GPTMPP_OFFSET 0xFC0
+
+
+
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*                                                            _SYSTEM_CONTROL_ADDRESS_                                                                         */
