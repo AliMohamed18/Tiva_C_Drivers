@@ -129,13 +129,13 @@ the action to be taken when the counter matches the load value. 					----> Drive
 the action to be taken when the counter matches comparator B while counting down. 	----> Drive pwmB Low.
 ¦ Write the PWMnGENB register with a value of 0x0000.080C.
 */		
-		if (Gen_A_or_B==GenA)		HwAccess(Pwm_BaseAddress[Module]+GeneratorA_Offset[Generator])|=0x8C;
-		else if (Gen_A_or_B==GenB)	HwAccess(Pwm_BaseAddress[Module]+GeneratorB_Offset[Generator])|=0x80C;
+		if (Gen_A_or_B==GenA)		HwAccess(Pwm_BaseAddress[Module]+GeneratorA_Offset[Generator])=0x8C;
+		else if (Gen_A_or_B==GenB)	HwAccess(Pwm_BaseAddress[Module]+GeneratorB_Offset[Generator])=0x80C;
 /*
 Set the frequency. 
 ¦  Write the PWMnLOAD register with a value of ( Load Counter ).
 */
-		HwAccess(Pwm_BaseAddress[Module]+LoadReg_Offset[Generator])|=Load_Value;
+		HwAccess(Pwm_BaseAddress[Module]+LoadReg_Offset[Generator])=Load_Value;
 /*
 Set the pulse width of the MnPWMn pin for a 25% duty cycle.
 ¦ Write the PWMnCMPn register with a value of ( Pwm Duty ).
@@ -185,7 +185,7 @@ void Pwm_SetDutyCycle( Pwm_ChannelType ChannelNumber, uint8 DutyCycle ){
 		else                                  					Gen_A_or_B=GenB;
 		Module=ChannelNumber/8;
 		Generator=TempPin/2;
-		Temp_Freq=1000;
+		Temp_Freq=6000;
 
 		Load=((SystemCoreClock / Temp_Freq)-1);
 		Value=(100-DutyCycle)*Load/100;
