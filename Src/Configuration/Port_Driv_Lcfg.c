@@ -29,7 +29,12 @@ const Port_ConfigType Port_Config[NUMBER_OF_ACTIVATED_CHANNELS] =
 	{
 		/* pin       			  Dir         		Mode     Attach      OutputCurr  */
 
-		{Dio_Channel_F2, PORT_PIN_OUT, F2_M1PWM6, DEFAULT, CURRENT_NA}
+		{Dio_Channel_F1, PORT_PIN_OUT, F1_M1PWM5, DEFAULT, CURRENT_NA},
+		{Dio_Channel_F2, PORT_PIN_OUT, F2_M1PWM6, DEFAULT, CURRENT_NA},
+		{Dio_Channel_F3, PORT_PIN_OUT, F3_M1PWM7, DEFAULT, CURRENT_NA}
+
+				
+
 };
 
 
