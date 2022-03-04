@@ -29,7 +29,6 @@ const Pwm_ConfigType Pwm_Config[NUMBER_OF_ACTIVATED_PWMS] =
 	{
 		{M1PWM5,6000,1},
 	    {M1PWM6,6000,1},
-		{M1PWM7,6000,1}
 		 
 		 };
 

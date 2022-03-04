@@ -27,11 +27,22 @@
 
 const Port_ConfigType Port_Config[NUMBER_OF_ACTIVATED_CHANNELS] =
 	{
-		/* pin       			  Dir         		Mode     Attach      OutputCurr  */
+		/* pin       		Dir         	Mode     	Attach   	OutputCurr  */
+		{Dio_Channel_B0, PORT_PIN_IN , 		B0_U1Rx, 	DEFAULT,	CURRENT_NA},
+		{Dio_Channel_B1, PORT_PIN_OUT, 		B1_U1Tx, 	DEFAULT,	CURRENT_NA},
+		
+		{Dio_Channel_A0, PORT_PIN_IN , 		A0_U0Rx, 	DEFAULT,	CURRENT_NA},
+		{Dio_Channel_A1, PORT_PIN_OUT, 		A1_U0Tx, 	DEFAULT,	CURRENT_NA},
+		
+		{Dio_Channel_F1, PORT_PIN_OUT, 		F1_M1PWM5, 	DEFAULT, 	CURRENT_NA},
+		{Dio_Channel_A2, PORT_PIN_OUT, 		DIO, 		DEFAULT,	CURRENT_NA},
+		{Dio_Channel_A3, PORT_PIN_OUT, 		DIO, 		DEFAULT, 	CURRENT_NA},
+		
+		{Dio_Channel_F2, PORT_PIN_OUT, 		F2_M1PWM6, 	DEFAULT, 	CURRENT_NA},
+		{Dio_Channel_D0, PORT_PIN_OUT, 		DIO, 		DEFAULT, 	CURRENT_NA},
+		{Dio_Channel_D1, PORT_PIN_OUT, 		DIO,	 	DEFAULT, 	CURRENT_NA},
 
-		{Dio_Channel_F1, PORT_PIN_OUT, F1_M1PWM5, DEFAULT, CURRENT_NA},
-		{Dio_Channel_F2, PORT_PIN_OUT, F2_M1PWM6, DEFAULT, CURRENT_NA},
-		{Dio_Channel_F3, PORT_PIN_OUT, F3_M1PWM7, DEFAULT, CURRENT_NA}
+
 
 				
 

@@ -27,7 +27,7 @@
 
 const Uart_ConfigType Uart_Config[NUMBER_OF_ACTIVATED_UARTS] =
 	{
-		{Uart1, 9600}};
+		{Uart0, 9600},{Uart1, 9600}};
 
 /**********************************************************************************************************************
  *  END OF FILE: Port_Lcfg.c
