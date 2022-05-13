@@ -32,17 +32,35 @@
 #define Back_Motor 0
 #define Seat_Motor 1
 
+#define Left_Motor 2
+#define Right_Motor 3
+
 #define Open  0
 #define Close 1
+
+#define Forward  0
+#define Backward 1
 
 #define MotorA Back_Motor
 #define MotorB Seat_Motor
 
+#define MotorC Left_Motor
+#define MotorD Right_Motor
+
+
 #define MotorA_Diriction_Pin Dio_Channel_D0
 #define MotorB_Diriction_Pin Dio_Channel_F4
 
+#define MotorC_Diriction_Pin Dio_Channel_B5
+#define MotorD_Diriction_Pin Dio_Channel_B4
+
+
 #define MotorA_Pwm_Pin       M1PWM6
 #define MotorB_Pwm_Pin       M1PWM7
+
+#define MotorC_Pwm_Pin       M0PWM0 
+#define MotorD_Pwm_Pin       M0PWM1
+
 
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
@@ -68,7 +86,7 @@
 * \Return value:   : Void                                 
 *******************************************************************************/
 
- void Move(uint8 Motor ,char Diriction ,uint8 Speed);
+ void Cytron_Move(uint8 Motor ,char Diriction ,uint8 Speed);
 
 /******************************************************************************
 * \Syntax          : void Stop(uint8 Motor)     
@@ -80,7 +98,7 @@
 * \Return value:   : Void                                 
 *******************************************************************************/
 
- void Stop(uint8 Motor);
+ void Cytron_Stop(uint8 Motor);
 
 
 #endif /* CYTRON_MOTOR_DRIVER_H */

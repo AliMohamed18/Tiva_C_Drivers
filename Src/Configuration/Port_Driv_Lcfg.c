@@ -12,7 +12,7 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "Port_Driv_Cfg.h"
+#include "Includes/Port_Driv_Cfg.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -27,7 +27,8 @@
 
 const Port_ConfigType Port_Config[NUMBER_OF_ACTIVATED_CHANNELS] =
 	{
-		/* pin       		Dir         	Mode     	Attach   	OutputCurr  */
+		/* pin       			  Dir         		Mode     Attach      OutputCurr  */
+
 		{Dio_Channel_B0, PORT_PIN_IN , 		B0_U1Rx, 	DEFAULT,	CURRENT_NA},
 		{Dio_Channel_B1, PORT_PIN_OUT, 		B1_U1Tx, 	DEFAULT,	CURRENT_NA},
 		
@@ -38,21 +39,23 @@ const Port_ConfigType Port_Config[NUMBER_OF_ACTIVATED_CHANNELS] =
 		{Dio_Channel_A2, PORT_PIN_OUT, 		DIO, 		DEFAULT,	CURRENT_NA},
 		{Dio_Channel_A3, PORT_PIN_OUT, 		DIO, 		DEFAULT, 	CURRENT_NA},
 		
-		{Dio_Channel_F2, PORT_PIN_OUT, 		F2_M1PWM6, 	DEFAULT, 	CURRENT_NA},
+		{Dio_Channel_F2, PORT_PIN_OUT, 		F2_M1PWM6 , 	DEFAULT, 	CURRENT_NA},
 		{Dio_Channel_D0, PORT_PIN_OUT, 		DIO, 		DEFAULT, 	CURRENT_NA},
-		{Dio_Channel_D1, PORT_PIN_OUT, 		DIO,	 	DEFAULT, 	CURRENT_NA},
 
+		{Dio_Channel_F3, PORT_PIN_OUT, 		F3_M1PWM7, 	DEFAULT, 	CURRENT_NA},
+		{Dio_Channel_F4, PORT_PIN_OUT, 		DIO, 		DEFAULT, 	CURRENT_NA},
+		
+		{Dio_Channel_B6, PORT_PIN_OUT, 		B6_M0PWM0, 	DEFAULT, 	CURRENT_NA},
+		{Dio_Channel_B5, PORT_PIN_OUT, 		DIO, 		DEFAULT, 	CURRENT_NA},
+		
+		{Dio_Channel_B7, PORT_PIN_OUT, 		B7_M0PWM1, 	DEFAULT, 	CURRENT_NA},
+		{Dio_Channel_B4, PORT_PIN_OUT, 		DIO, 		DEFAULT, 	CURRENT_NA},
 
-
-				
 
 };
 
 
-const Dio_ChannelGroupType RGB = {0x0E, 1, PORTF};
-const Dio_ChannelGroupType KeypadInput;
-const Dio_ChannelGroupType KeypadOutput;
-const Dio_ChannelGroupType Lcd_Data;
+
 
 /**********************************************************************************************************************
  *  END OF FILE: Port_Lcfg.c

@@ -17,9 +17,12 @@ PWM		DIR		 OUT A	 OUT B
 * \Parameters (out): Void                                                      
 * \Return value:   : Void                                 
 *******************************************************************************/
- void Move(uint8 Motor ,char Diriction ,uint8 Speed)
+ void Cytron_Move(uint8 Motor ,char Diriction ,uint8 Speed)
 {
-	uint8 Motor_Diriction_Pin,Motor_Pwm_Pin;
+	uint8 Motor_Diriction_Pin,Motor_Pwm_Pin,DutyCyc;
+
+	DutyCyc =((255)/(100))*(Speed);
+
 	
 	if(Motor==MotorA)
 	{
@@ -30,19 +33,29 @@ PWM		DIR		 OUT A	 OUT B
 	{
 		Motor_Diriction_Pin=	MotorB_Diriction_Pin;
 		Motor_Pwm_Pin=			MotorB_Pwm_Pin;
-	} 
+	}
+	else if(Motor==MotorC)
+	{
+		Motor_Diriction_Pin=	MotorC_Diriction_Pin;
+		Motor_Pwm_Pin=			MotorC_Pwm_Pin;
+	}
+	else if(Motor==MotorD)
+	{
+		Motor_Diriction_Pin=	MotorD_Diriction_Pin;
+		Motor_Pwm_Pin=			MotorD_Pwm_Pin;
+	}	
 	else return;
 	
 		
 	if (Diriction == Open)
 	{
 		Dio_WriteChannel(Motor_Diriction_Pin,STD_low);
-		Pwm_SetDutyCycle(Motor_Pwm_Pin,Speed);
+		Pwm_SetDutyCycle(Motor_Pwm_Pin,DutyCyc);
 	}
 	else if (Diriction == Close)
 	{
 		Dio_WriteChannel(Motor_Diriction_Pin,STD_high);
-		Pwm_SetDutyCycle(Motor_Pwm_Pin,Speed);
+		Pwm_SetDutyCycle(Motor_Pwm_Pin,DutyCyc);
 	}
 	else return;
 
@@ -59,12 +72,14 @@ PWM		DIR		 OUT A	 OUT B
 *******************************************************************************/
 
 				
-void Stop(uint8 Motor)
+void Cytron_Stop(uint8 Motor)
 {
 	uint8 Motor_Pwm_Pin;
 	
 	if		(Motor==MotorA)      Motor_Pwm_Pin=MotorA_Pwm_Pin;
 	else if (Motor==MotorB)      Motor_Pwm_Pin=MotorB_Pwm_Pin;
+	else if (Motor==MotorC)      Motor_Pwm_Pin=MotorC_Pwm_Pin;
+	else if (Motor==MotorD)      Motor_Pwm_Pin=MotorD_Pwm_Pin;
 
 	else return;
 

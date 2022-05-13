@@ -12,8 +12,8 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "Pwm.h"
-#include "Pwm_Cfg.h"
+#include "Includes/Pwm.h"
+#include "../Configuration/Includes/Pwm_Cfg.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -129,13 +129,13 @@ the action to be taken when the counter matches the load value. 					----> Drive
 the action to be taken when the counter matches comparator B while counting down. 	----> Drive pwmB Low.
 ¦ Write the PWMnGENB register with a value of 0x0000.080C.
 */		
-		if (Gen_A_or_B==GenA)		HwAccess(Pwm_BaseAddress[Module]+GeneratorA_Offset[Generator])=0x8C;
-		else if (Gen_A_or_B==GenB)	HwAccess(Pwm_BaseAddress[Module]+GeneratorB_Offset[Generator])=0x80C;
+		if (Gen_A_or_B==GenA)		HwAccess(Pwm_BaseAddress[Module]+GeneratorA_Offset[Generator])|=0x8C;
+		else if (Gen_A_or_B==GenB)	HwAccess(Pwm_BaseAddress[Module]+GeneratorB_Offset[Generator])|=0x80C;
 /*
 Set the frequency. 
 ¦  Write the PWMnLOAD register with a value of ( Load Counter ).
 */
-		HwAccess(Pwm_BaseAddress[Module]+LoadReg_Offset[Generator])=Load_Value;
+		HwAccess(Pwm_BaseAddress[Module]+LoadReg_Offset[Generator])|=Load_Value;
 /*
 Set the pulse width of the MnPWMn pin for a 25% duty cycle.
 ¦ Write the PWMnCMPn register with a value of ( Pwm Duty ).
@@ -154,7 +154,8 @@ Start the timers in PWM generator 0.
 Enable PWM outputs.
 ¦ Write the PWMENABLE register.
 */
-		HwAccess(Pwm_BaseAddress[Module]+PWMENABLE_OFFSET)|=(1 << TempPin); 
+		if (Temp_DutyCycle==0) HwAccess(Pwm_BaseAddress[Module]+PWMENABLE_OFFSET)&= (~(1 << TempPin));								
+		else				   HwAccess(Pwm_BaseAddress[Module]+PWMENABLE_OFFSET)|=(1 << TempPin); 
 	}
 
 	
@@ -174,7 +175,7 @@ Enable PWM outputs.
 *******************************************************************************/
 
 void Pwm_SetDutyCycle( Pwm_ChannelType ChannelNumber, uint8 DutyCycle ){
-		uint8 Counter,Module,Generator,TempPin,Gen_A_or_B;
+		uint8 Module,Generator,TempPin,Gen_A_or_B;
 		uint32 Load,Temp_Freq,Value;
 
 
@@ -185,15 +186,17 @@ void Pwm_SetDutyCycle( Pwm_ChannelType ChannelNumber, uint8 DutyCycle ){
 		else                                  					Gen_A_or_B=GenB;
 		Module=ChannelNumber/8;
 		Generator=TempPin/2;
-		Temp_Freq=6000;
-
-		Load=((SystemCoreClock / Temp_Freq)-1);
-		Value=(100-DutyCycle)*Load/100;
-
-
-		if (Gen_A_or_B==GenA)		HwAccess(Pwm_BaseAddress[Module]+CompareA_Offset[Generator])=Value;
-		else if (Gen_A_or_B==GenB)	HwAccess(Pwm_BaseAddress[Module]+CompareB_Offset[Generator])=Value;
-
+		Temp_Freq=1000;
+		
+		if (DutyCycle==0) HwAccess(Pwm_BaseAddress[Module]+PWMENABLE_OFFSET)&= (~(1 << TempPin));								
+		else
+		{
+			HwAccess(Pwm_BaseAddress[Module]+PWMENABLE_OFFSET)|=(1 << TempPin); 
+			Load=((SystemCoreClock / Temp_Freq)-1);
+			Value=(100-DutyCycle)*Load/100;
+			if (Gen_A_or_B==GenA)		HwAccess(Pwm_BaseAddress[Module]+CompareA_Offset[Generator])=Value;
+			else if (Gen_A_or_B==GenB)	HwAccess(Pwm_BaseAddress[Module]+CompareB_Offset[Generator])=Value;
+		}
 
 
 }

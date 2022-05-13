@@ -12,8 +12,8 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "Mcu_Cfg.h"
-#include "Mcu_Types.h"
+#include "Includes/Mcu_Cfg.h"
+#include "../Mcal/Includes/Mcu_Types.h"
 
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
@@ -28,13 +28,16 @@
  
  const  uint8 MCU_ACTIVATED_GATES[NUMBER_OF_ACTIVATED_GATES]={
 	 
-	 MCU_PWM_1_ENABLE_CLOCK,
 	 MCU_GPIOA_ENABLE_CLOCK,
 	 MCU_GPIOB_ENABLE_CLOCK,
 	 MCU_GPIOD_ENABLE_CLOCK,
 	 MCU_GPIOF_ENABLE_CLOCK,
+	 
+	 MCU_UART_0_ENABLE_CLOCK,
 	 MCU_UART_1_ENABLE_CLOCK,
-	 MCU_UART_0_ENABLE_CLOCK
+	 MCU_PWM_0_ENABLE_CLOCK,
+	 MCU_PWM_1_ENABLE_CLOCK
+
  };
 
  

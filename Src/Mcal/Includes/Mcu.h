@@ -15,10 +15,11 @@
  * INCLUDES
  *********************************************************************************************************************/
 #include "Mcu_Types.h"
-#include "Mcu_Cfg.h"
-#include "Std_Types.h"
-#include "Mcu_Hw.h"
-#include "Bit_Operations.h"
+#include "../../Configuration/Includes\Mcu_Cfg.h"
+
+#include "../../Common/Std_Types.h"
+#include "../../Common/Mcu_Hw.h"
+#include "../../Common/Bit_Operations.h"
 
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS

@@ -14,9 +14,9 @@
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
-#include "Std_Types.h"
-#include "Mcu_Hw.h"
-#include "Uart.h"
+#include "../../Common/Std_Types.h"
+#include "../../Common/Mcu_Hw.h"
+#include "../../Mcal/Includes/Uart.h"
 
 extern uint32 SystemCoreClock;
 
